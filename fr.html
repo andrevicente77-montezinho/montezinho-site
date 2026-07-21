@@ -4,33 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MonteZinho — Maison au bord du lac, Benavila, Alentejo</title>
-<meta name="description" content="MonteZinho, une maison au bord du barrage de Maranhão, à Benavila, Portalegre. Hébergement local avec piscine, une oliveraie de 3 hectares et un accès privé à l'eau.">
+<meta name="description" content="MonteZinho, casa junto à Barragem do Maranhão, em Benavila, Avis. Alojamento local com piscina, olival de 3 hectares e acesso privado à água.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --white:#ffffff;
-    --ink:#141414;
-    --ink-soft:#59605f;
-    --blue:#4f7a82;
-    --blue-deep:#1f3336;
-    --terracotta:#bcd4d8;
-    --olive:#b8794a;
-    --stone:#eef3f3;
-    --stone-line: rgba(20,20,20,0.12);
+    --white:#f4f9fb;
+    --ink:#2c2c2c;
+    --ink-soft:#757473;
+    --blue:#7faec0;
+    --blue-deep:#203740;
+    --terracotta:#b7d8e2;
+    --olive:#6e7f67;
+    --sand:#dccfb7;
+    --stone:#eff6f9;
+    --stone-line: rgba(44,44,44,0.12);
     --warn:#a8503f;
     --warn-bg:#f7ece9;
     --radius: 2px;
+    --radius-btn: 8px;
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top:88px;}
   body{
     background:var(--white);
     color:var(--ink);
-    font-family:'Work Sans', sans-serif;
+    font-family:'Inter', sans-serif;
     font-weight:400;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
@@ -38,7 +40,7 @@
   }
 
   h1,h2,h3,.display{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-weight:700;
     line-height:1.05;
     letter-spacing:-0.01em;
@@ -106,10 +108,10 @@
     display:flex;
     align-items:center;
     gap:0.65rem;
-    font-family:'Poppins', sans-serif;
-    font-weight:700;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
     font-size:1.05rem;
-    letter-spacing:0.01em;
+    letter-spacing:0.02em;
     text-transform:uppercase;
     color:var(--ink);
   }
@@ -144,8 +146,10 @@
   .nav-cta{
     border:1px solid var(--ink);
     padding:0.5rem 1.15rem;
+    font-family:'Inter', sans-serif;
     font-size:0.82rem;
     font-weight:600;
+    border-radius:var(--radius-btn);
     transition: all .25s ease;
   }
   .nav-cta:hover{ background:var(--ink); color:var(--white); }
@@ -180,7 +184,7 @@
     min-height:100vh;
     display:flex;
     align-items:flex-start;
-    padding:6.5rem 6vw 4rem;
+    padding:5.6rem 6vw 4rem;
     position:relative;
     background:
       linear-gradient(100deg, rgba(20,20,20,0.72) 0%, rgba(20,20,20,0.42) 42%, rgba(20,20,20,0.12) 68%),
@@ -194,19 +198,30 @@
   }
   .hero-copy{ max-width:640px; }
   .hero h1{
-    font-size:clamp(2.8rem, 6.2vw, 5rem);
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.01em;
-    margin:0.4rem 0 0.7rem;
+    font-size:clamp(3rem, 6.6vw, 5.4rem);
+    font-weight:700;
+    font-style:italic;
+    letter-spacing:0.005em;
+    margin:0.3rem 0 0.4rem;
     color:var(--white);
     text-shadow:0 2px 20px rgba(0,0,0,0.3);
   }
+  .hero .tagline{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1rem, 1.6vw, 1.5rem);
+    color:var(--terracotta);
+    margin-bottom:0.4rem;
+    white-space:nowrap;
+    text-shadow:0 1px 12px rgba(0,0,0,0.3);
+  }
   .hero p.lede{
-    font-size:1.15rem;
+    font-size:0.92rem;
+    line-height:1.45;
     color:#eef1ef;
-    max-width:38ch;
-    margin-bottom:1.1rem;
+    max-width:56ch;
+    margin-bottom:0.7rem;
     text-shadow:0 1px 12px rgba(0,0,0,0.25);
   }
   .hero .eyebrow{ color:var(--terracotta); text-shadow:0 1px 8px rgba(0,0,0,0.35); }
@@ -221,9 +236,10 @@
     align-items:center;
     gap:0.5rem;
     padding:0.95rem 1.6rem;
+    font-family:'Inter', sans-serif;
     font-size:0.88rem;
     font-weight:600;
-    border-radius:var(--radius);
+    border-radius:var(--radius-btn);
     transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
   }
   .btn-primary{
@@ -243,7 +259,7 @@
     display:flex;
     align-items:center;
     gap:0.6rem;
-    margin-top:0.7rem;
+    margin-top:0.4rem;
     font-size:0.85rem;
     color:#e4e7e4;
     text-shadow:0 1px 8px rgba(0,0,0,0.3);
@@ -327,11 +343,11 @@
     max-width:46ch;
   }
   .casa-copy .quote{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-weight:600;
     font-size:1.25rem;
     color:var(--ink);
-    border-left:3px solid var(--blue);
+    border-left:3px solid var(--olive);
     padding-left:1.2rem;
     margin:1.8rem 0;
     max-width:38ch;
@@ -356,7 +372,7 @@
     margin-top:0.15rem;
   }
   .feature-item h3{
-    font-family:'Work Sans', sans-serif;
+    font-family:'Inter', sans-serif;
     font-size:0.98rem;
     font-weight:600;
     margin-bottom:0.25rem;
@@ -395,7 +411,7 @@
     margin-bottom:1.3rem;
   }
   .ext-card h3{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-weight:600;
     font-size:1.1rem;
     margin-bottom:0.5rem;
@@ -443,7 +459,7 @@
   }
   .gallery-category:last-child{ margin-bottom:0; }
   .gallery-cat-title{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-weight:600;
     font-size:1rem;
     letter-spacing:0.02em;
@@ -479,6 +495,45 @@
     transform:scale(1.035);
     filter:brightness(1.03);
   }
+
+  /* ---------- FLOATING ACTIONS ---------- */
+  .floating-actions{
+    position:fixed;
+    right:1.4rem;
+    bottom:1.4rem;
+    z-index:150;
+    display:flex;
+    flex-direction:column-reverse;
+    align-items:flex-end;
+    gap:0.9rem;
+  }
+  .fab{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.5rem;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    text-decoration:none;
+    box-shadow:0 6px 20px rgba(0,0,0,0.18);
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .fab:hover{ transform:translateY(-3px); box-shadow:0 10px 26px rgba(0,0,0,0.22); }
+  .fab-whatsapp{
+    width:52px; height:52px;
+    border-radius:50%;
+    background:#25d366;
+  }
+  .fab-whatsapp svg{ width:26px; height:26px; stroke:var(--white); }
+  .fab-book{
+    padding:0.85rem 1.4rem;
+    border-radius:999px;
+    background:var(--blue);
+    color:var(--white);
+    font-size:0.9rem;
+  }
+  .fab-book svg{ width:18px; height:18px; stroke:var(--white); flex-shrink:0; }
+  .fab-book:hover{ background:var(--blue-deep); }
 
   .lightbox{
     position:fixed;
@@ -536,9 +591,9 @@
   }
   .reviews-score{ display:flex; flex-direction:column; gap:0.3rem; }
   .reviews-score-num{
-    font-family:'Poppins', sans-serif;
-    font-weight:800;
-    font-size:3rem;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:3.4rem;
     line-height:1;
     color:var(--ink);
   }
@@ -554,7 +609,7 @@
     color:var(--ink-soft);
   }
   .reviews-bar-row span:last-child{ color:var(--ink); font-weight:600; text-align:right; }
-  .bar{ height:5px; background:var(--stone); border-radius:4px; overflow:hidden; }
+  .bar{ height:5px; background:var(--sand); border-radius:4px; overflow:hidden; }
   .bar-fill{ height:100%; background:var(--blue); border-radius:4px; }
 
   .reviews-grid{
@@ -577,7 +632,7 @@
     align-items:baseline;
     margin-bottom:0.4rem;
   }
-  .review-author{ font-family:'Poppins', sans-serif; font-weight:600; font-size:0.92rem; }
+  .review-author{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:0.92rem; }
   .review-date{ font-size:0.78rem; color:var(--ink-soft); }
   .review-stars-small{ color:var(--terracotta); font-size:0.82rem; letter-spacing:0.12em; margin-bottom:0.6rem; }
   .review-text{
@@ -600,7 +655,7 @@
     background:none;
     border:none;
     padding:0;
-    font-family:'Poppins', sans-serif;
+    font-family:'Inter', sans-serif;
     font-weight:600;
     font-size:0.8rem;
     color:var(--blue);
@@ -633,7 +688,7 @@
     margin-bottom:3rem;
   }
   .booking-panel h3{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-size:1.05rem;
     font-weight:600;
     margin-bottom:0.3rem;
@@ -661,7 +716,7 @@
     margin-top:0.2rem;
   }
   .contact-info h3{
-    font-family:'Work Sans', sans-serif;
+    font-family:'Inter', sans-serif;
     font-size:0.82rem;
     text-transform:uppercase;
     letter-spacing:0.08em;
@@ -695,6 +750,7 @@
     gap:0.5rem;
     background:var(--blue);
     color:var(--white);
+    font-family:'Inter', sans-serif;
     font-size:0.85rem;
     font-weight:600;
     padding:0.75rem 1rem;
@@ -748,7 +804,7 @@
     border-bottom:1px solid var(--stone-line);
     background:transparent;
     padding:0.6rem 0.1rem;
-    font-family:'Work Sans', sans-serif;
+    font-family:'Inter', sans-serif;
     font-size:1rem;
     color:var(--ink);
     transition:border-color .25s ease;
@@ -815,9 +871,9 @@
   }
   .cal-header button:hover{ background:var(--stone); }
   .cal-header span{
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
-    font-size:0.9rem;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1.3rem;
     text-transform:capitalize;
   }
   .cal-sync-note{
@@ -837,13 +893,15 @@
   .cal-grid{
     display:grid;
     grid-template-columns:repeat(7, 1fr);
-    gap:3px;
+    gap:4px;
+    justify-items:center;
   }
   .cal-day{
-    aspect-ratio:1;
+    width:32px;
+    height:32px;
     border:none;
     background:none;
-    font-family:'Work Sans', sans-serif;
+    font-family:'Inter', sans-serif;
     font-size:0.78rem;
     border-radius:50%;
     display:flex;
@@ -863,7 +921,7 @@
   }
   .cal-day--free:hover{ background:var(--stone); }
   .cal-day--selected{ background:var(--blue) !important; color:var(--white); }
-  .cal-day--inrange{ background:var(--stone); border-radius:0; }
+  .cal-day--inrange{ background:var(--sand); border-radius:0; }
   .cal-legend{
     display:flex;
     flex-wrap:wrap;
@@ -897,7 +955,7 @@
   .avail-box.no{ background:var(--warn-bg); border-left:3px solid var(--warn); }
   .avail-box.err{ background:var(--warn-bg); border-left:3px solid var(--warn); }
   .avail-status{
-    font-family:'Poppins', sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-weight:600;
     font-size:0.98rem;
     margin-bottom:0.4rem;
@@ -916,8 +974,9 @@
   .avail-chip{
     background:var(--white);
     border:1px solid var(--stone-line);
-    border-radius:var(--radius);
+    border-radius:var(--radius-btn);
     padding:0.55rem 0.9rem;
+    font-family:'Inter', sans-serif;
     font-size:0.82rem;
     font-weight:600;
     color:var(--ink);
@@ -962,6 +1021,11 @@
     .burger{ display:flex; }
     .lang-switch{ margin-left:0.8rem; gap:0.5rem; font-size:0.72rem; }
     .hero{ background-position: 62% 78%; }
+    .hero .tagline{ white-space:normal; font-size:1.05rem; }
+    .floating-actions{ right:1rem; bottom:1rem; bottom:calc(1rem + env(safe-area-inset-bottom)); gap:0.7rem; }
+    .fab-whatsapp{ width:46px; height:46px; }
+    .fab-whatsapp svg{ width:22px; height:22px; }
+    .fab-book{ padding:0.7rem 1.1rem; font-size:0.82rem; }
     .casa-grid, .contact-grid{ grid-template-columns:1fr; }
     .reviews-summary{ grid-template-columns:1fr; gap:1.6rem; }
     .reviews-grid{ grid-template-columns:1fr; }
@@ -1022,7 +1086,8 @@
       <div class="hero-copy">
         <p class="eyebrow">Hébergement local · Benavila, Alentejo</p>
         <h1>MonteZinho</h1>
-        <p class="lede">Une maison au bord de l'eau, sur la rive du barrage de Maranhão. Accès direct et privé au lac, entourée d'une oliveraie de 3 hectares.</p>
+        <p class="tagline">Où l'Alentejo se rafraîchit... et les souvenirs prennent vie.</p>
+        <p class="lede">Découvrez un refuge privé où la sérénité du Haut Alentejo rencontre la beauté du barrage de Maranhão. Un espace pensé pour les familles qui apprécient le confort, l'intimité et des expériences authentiques, dans un cadre où le temps ralentit et où chaque jour invite à créer de nouveaux souvenirs.</p>
         <div class="cta-row">
           <a href="#contactos" class="btn btn-primary">Réserver un séjour</a>
           <a href="#casa" class="btn btn-ghost">Découvrir la maison</a>
@@ -1153,88 +1218,88 @@
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Salon</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="0"><img src="assets/gallery/gallery-14.jpg" alt="Salon de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="1"><img src="assets/gallery/gallery-29.jpg" alt="Détail des canapés du salon de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="2"><img src="assets/gallery/gallery-36.jpg" alt="Salon de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="0"><img src="assets/gallery/gallery-14.jpg" width="720" height="480" alt="Salon de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="1"><img src="assets/gallery/gallery-29.jpg" width="720" height="900" alt="Détail des canapés du salon de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="2"><img src="assets/gallery/gallery-36.jpg" width="720" height="540" alt="Salon de la maison MonteZinho" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Cuisine</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="3"><img src="assets/gallery/gallery-21.jpg" alt="Cuisine et table à manger de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="4"><img src="assets/gallery/gallery-31.jpg" alt="Cuisine équipée de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="5"><img src="assets/gallery/gallery-30.jpg" alt="Cuisine ouverte de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="3"><img src="assets/gallery/gallery-21.jpg" width="720" height="480" alt="Cuisine et table à manger de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="4"><img src="assets/gallery/gallery-31.jpg" width="720" height="900" alt="Cuisine équipée de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="5"><img src="assets/gallery/gallery-30.jpg" width="720" height="900" alt="Cuisine ouverte de la maison MonteZinho" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Coin repas</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="6"><img src="assets/gallery/gallery-17.jpg" alt="Terrasse avec table à manger de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="7"><img src="assets/gallery/gallery-38.jpg" alt="Table dressée sur la terrasse de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="6"><img src="assets/gallery/gallery-17.jpg" width="720" height="480" alt="Terrasse avec table à manger de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="7"><img src="assets/gallery/gallery-38.jpg" width="720" height="480" alt="Table dressée sur la terrasse de la maison MonteZinho" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Chambre 1</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="8"><img src="assets/gallery/gallery-18.jpg" alt="Chambre 1 de la maison MonteZinho, avec lit queen" loading="lazy"></button>
-        <button class="gallery-item" data-index="9"><img src="assets/gallery/gallery-37.jpg" alt="Chambre 1 de la maison MonteZinho, avec lit queen et armoires" loading="lazy"></button>
+        <button class="gallery-item" data-index="8"><img src="assets/gallery/gallery-18.jpg" width="720" height="480" alt="Chambre 1 de la maison MonteZinho, avec lit queen" loading="lazy"></button>
+        <button class="gallery-item" data-index="9"><img src="assets/gallery/gallery-37.jpg" width="720" height="540" alt="Chambre 1 de la maison MonteZinho, avec lit queen et armoires" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Chambre 2</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="10"><img src="assets/gallery/gallery-05.jpg" alt="Chambre 2 de la maison MonteZinho, avec lits superposés" loading="lazy"></button>
-        <button class="gallery-item" data-index="11"><img src="assets/gallery/gallery-10.jpg" alt="Chambre 2 de la maison MonteZinho, avec lits superposés" loading="lazy"></button>
+        <button class="gallery-item" data-index="10"><img src="assets/gallery/gallery-05.jpg" width="720" height="720" alt="Chambre 2 de la maison MonteZinho, avec lits superposés" loading="lazy"></button>
+        <button class="gallery-item" data-index="11"><img src="assets/gallery/gallery-10.jpg" width="720" height="480" alt="Chambre 2 de la maison MonteZinho, avec lits superposés" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Salle de bain</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="12"><img src="assets/gallery/gallery-07.jpg" alt="Douche de la salle de bain de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="13"><img src="assets/gallery/gallery-11.jpg" alt="Salle de bain de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="14"><img src="assets/gallery/gallery-22.jpg" alt="Serviettes disponibles à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="15"><img src="assets/gallery/gallery-28.jpg" alt="Lavabo de la salle de bain de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="12"><img src="assets/gallery/gallery-07.jpg" width="720" height="1080" alt="Douche de la salle de bain de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="13"><img src="assets/gallery/gallery-11.jpg" width="720" height="960" alt="Salle de bain de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="14"><img src="assets/gallery/gallery-22.jpg" width="720" height="480" alt="Serviettes disponibles à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="15"><img src="assets/gallery/gallery-28.jpg" width="720" height="900" alt="Lavabo de la salle de bain de la maison MonteZinho" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Extérieur</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="16"><img src="assets/gallery/gallery-01.jpg" alt="Vue aérienne de MonteZinho, entourée de l'oliveraie et au bord du lac" loading="lazy"></button>
-        <button class="gallery-item" data-index="17"><img src="assets/gallery/gallery-02.jpg" alt="Vue aérienne de la propriété MonteZinho et du barrage de Maranhão" loading="lazy"></button>
-        <button class="gallery-item" data-index="18"><img src="assets/gallery/gallery-04.jpg" alt="Vue sur le lac, à côté de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="19"><img src="assets/gallery/gallery-06.jpg" alt="Chaises longues sur la terrasse de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="20"><img src="assets/gallery/gallery-08.jpg" alt="Pergola en bois avec vue sur le lac, à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="21"><img src="assets/gallery/gallery-09.jpg" alt="Porte d'entrée bleu clair de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="22"><img src="assets/gallery/gallery-13.jpg" alt="Vue aérienne de la rive du lac, à côté de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="23"><img src="assets/gallery/gallery-16.jpg" alt="Pergola en bois au-dessus de l'eau, à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="24"><img src="assets/gallery/gallery-20.jpg" alt="Vue aérienne de la maison MonteZinho avec la piscine" loading="lazy"></button>
-        <button class="gallery-item" data-index="25"><img src="assets/gallery/gallery-23.jpg" alt="Vue aérienne de la piscine de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="26"><img src="assets/gallery/gallery-24.jpg" alt="Douche extérieure près de la piscine de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="27"><img src="assets/gallery/gallery-25.jpg" alt="Piscine de la maison MonteZinho illuminée au crépuscule" loading="lazy"></button>
-        <button class="gallery-item" data-index="28"><img src="assets/gallery/gallery-27.jpg" alt="Chemin d'entrée de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="29"><img src="assets/gallery/gallery-33.jpg" alt="Extérieur de la maison MonteZinho, parmi les oliviers" loading="lazy"></button>
-        <button class="gallery-item" data-index="30"><img src="assets/gallery/gallery-34.jpg" alt="Chaises sur la pergola avec vue sur le lac, à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="31"><img src="assets/gallery/gallery-35.jpg" alt="Piscine de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="32"><img src="assets/gallery/gallery-40.jpg" alt="Ponton en bois sur le lac, à côté de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="16"><img src="assets/gallery/gallery-01.jpg" width="720" height="405" alt="Vue aérienne de MonteZinho, entourée de l'oliveraie et au bord du lac" loading="lazy"></button>
+        <button class="gallery-item" data-index="17"><img src="assets/gallery/gallery-02.jpg" width="720" height="306" alt="Vue aérienne de la propriété MonteZinho et du barrage de Maranhão" loading="lazy"></button>
+        <button class="gallery-item" data-index="18"><img src="assets/gallery/gallery-04.jpg" width="720" height="960" alt="Vue sur le lac, à côté de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="19"><img src="assets/gallery/gallery-06.jpg" width="720" height="480" alt="Chaises longues sur la terrasse de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="20"><img src="assets/gallery/gallery-08.jpg" width="720" height="540" alt="Pergola en bois avec vue sur le lac, à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="21"><img src="assets/gallery/gallery-09.jpg" width="720" height="480" alt="Porte d'entrée bleu clair de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="22"><img src="assets/gallery/gallery-13.jpg" width="720" height="405" alt="Vue aérienne de la rive du lac, à côté de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="23"><img src="assets/gallery/gallery-16.jpg" width="720" height="540" alt="Pergola en bois au-dessus de l'eau, à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="24"><img src="assets/gallery/gallery-20.jpg" width="720" height="405" alt="Vue aérienne de la maison MonteZinho avec la piscine" loading="lazy"></button>
+        <button class="gallery-item" data-index="25"><img src="assets/gallery/gallery-23.jpg" width="720" height="1280" alt="Vue aérienne de la piscine de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="26"><img src="assets/gallery/gallery-24.jpg" width="720" height="960" alt="Douche extérieure près de la piscine de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="27"><img src="assets/gallery/gallery-25.jpg" width="720" height="540" alt="Piscine de la maison MonteZinho illuminée au crépuscule" loading="lazy"></button>
+        <button class="gallery-item" data-index="28"><img src="assets/gallery/gallery-27.jpg" width="720" height="960" alt="Chemin d'entrée de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="29"><img src="assets/gallery/gallery-33.jpg" width="720" height="540" alt="Extérieur de la maison MonteZinho, parmi les oliviers" loading="lazy"></button>
+        <button class="gallery-item" data-index="30"><img src="assets/gallery/gallery-34.jpg" width="720" height="540" alt="Chaises sur la pergola avec vue sur le lac, à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="31"><img src="assets/gallery/gallery-35.jpg" width="720" height="480" alt="Piscine de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="32"><img src="assets/gallery/gallery-40.jpg" width="720" height="720" alt="Ponton en bois sur le lac, à côté de la maison MonteZinho" loading="lazy"></button>
       </div>
     </div>
 
     <div class="wrap gallery-category">
       <h3 class="gallery-cat-title">Autres</h3>
       <div class="gallery-grid">
-        <button class="gallery-item" data-index="33"><img src="assets/gallery/gallery-03.jpg" alt="Vélos disponibles à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="34"><img src="assets/gallery/gallery-12.jpg" alt="Canoë et gilets de sauvetage disponibles à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="35"><img src="assets/gallery/gallery-15.jpg" alt="Planche de SUP disponible à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="36"><img src="assets/gallery/gallery-19.jpg" alt="Chaussures disponibles pour les hôtes de la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="37"><img src="assets/gallery/gallery-26.jpg" alt="Promenade au crépuscule au bord du lac, à la maison MonteZinho" loading="lazy"></button>
-        <button class="gallery-item" data-index="38"><img src="assets/gallery/gallery-32.jpg" alt="Canoë sur la rive du lac, en fin de journée" loading="lazy"></button>
-        <button class="gallery-item" data-index="39"><img src="assets/gallery/gallery-39.jpg" alt="Balade en canoë sur le barrage de Maranhão" loading="lazy"></button>
+        <button class="gallery-item" data-index="33"><img src="assets/gallery/gallery-03.jpg" width="720" height="540" alt="Vélos disponibles à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="34"><img src="assets/gallery/gallery-12.jpg" width="720" height="540" alt="Canoë et gilets de sauvetage disponibles à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="35"><img src="assets/gallery/gallery-15.jpg" width="720" height="540" alt="Planche de SUP disponible à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="36"><img src="assets/gallery/gallery-19.jpg" width="720" height="540" alt="Chaussures disponibles pour les hôtes de la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="37"><img src="assets/gallery/gallery-26.jpg" width="720" height="960" alt="Promenade au crépuscule au bord du lac, à la maison MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="38"><img src="assets/gallery/gallery-32.jpg" width="720" height="540" alt="Canoë sur la rive du lac, en fin de journée" loading="lazy"></button>
+        <button class="gallery-item" data-index="39"><img src="assets/gallery/gallery-39.jpg" width="720" height="480" alt="Balade en canoë sur le barrage de Maranhão" loading="lazy"></button>
       </div>
     </div>
   </section>
@@ -1302,7 +1367,7 @@
       <div class="section-head">
         <p class="eyebrow">Contact</p>
         <h2>Organisons votre séjour</h2>
-        <p>Sans intermédiaire — la réservation se fait directement avec moi, par téléphone ou par email. Je réponds le plus vite possible.</p>
+        <p>Sans intermédiaire — la réservation se fait directement avec nous, par téléphone ou par email. Nous répondons le plus vite possible.</p>
       </div>
 
       <div class="booking-panel">
@@ -1322,7 +1387,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <div>
               <h3>Localisation</h3>
-              <p>Benavila, Portalegre<br>Alentejo, Portugal</p>
+              <p>Benavila, Avis<br>Alentejo, Portugal</p>
             </div>
           </div>
 
@@ -1384,7 +1449,6 @@
               <input type="date" id="saida" name="saida" required>
             </div>
           </div>
-          <p class="field-hint">J'accepte le départ et l'arrivée d'autres hôtes le même jour.</p>
 
           <div class="form-row">
             <div class="field">
@@ -1453,7 +1517,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 MonteZinho — Benavila, Portalegre · AL 144255/AL</span>
+      <span>&copy; 2026 MonteZinho — Benavila, Avis · AL 144255/AL</span>
       <nav class="lang-switch">
         <a href="index.html">PT</a>
         <a href="en.html">EN</a>
@@ -1462,6 +1526,16 @@
       </nav>
     </div>
   </div></footer>
+
+<div class="floating-actions">
+  <a href="https://wa.me/351914432980" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contacter via WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  </a>
+  <a href="#contactos" class="fab fab-book">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+    <span>Réserver</span>
+  </a>
+</div>
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
@@ -1472,6 +1546,18 @@
 </div>
 
 <script>
+  // ---------- SMOOTH SCROLL ----------
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = id ? document.getElementById(id) : document.body;
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', '#' + id);
+    });
+  });
+
   // Nav background on scroll
   const nav = document.getElementById('siteNav');
   window.addEventListener('scroll', () => {
@@ -1668,8 +1754,8 @@
       syncStatusEl.className = 'sync-status sync-ok';
       checkBtn.disabled = false;
     } else if(syncStatus === 'error'){
-      syncStatusEl.textContent = 'Impossible de synchroniser avec Airbnb — seules les réservations enregistrées manuellement sont vérifiées.';
-      syncStatusEl.className = 'sync-status sync-err';
+      syncStatusEl.textContent = '';
+      syncStatusEl.className = 'sync-status';
       checkBtn.disabled = false;
     }
   }
@@ -1782,7 +1868,7 @@
         });
         html += '</div>';
       } else {
-        html += '<p class="avail-note">Je n\'ai pas trouvé de dates libres à proximité. Contactez-moi directement pour trouver une alternative.</p>';
+        html += '<p class="avail-note">Nous n\'avons pas trouvé de dates libres à proximité. Contactez-nous directement pour trouver une alternative.</p>';
       }
       html += '</div>';
       resultBox.innerHTML = html;
@@ -1867,11 +1953,20 @@
       const date = new Date(Date.UTC(calViewYear, calViewMonth, d));
       const iso = toISO(date);
       let cls = 'cal-day';
-      let clickable = true;
+      const isPast = date < today;
+      const isBooked = !isPast && isDateBooked(date);
+      let clickable;
 
-      if(date < today){ cls += ' cal-day--past'; clickable = false; }
-      else if(isDateBooked(date)){ cls += ' cal-day--booked'; clickable = false; }
-      else{ cls += ' cal-day--free'; }
+      if(isPast){ cls += ' cal-day--past'; clickable = false; }
+      else if(isBooked){
+        cls += ' cal-day--booked';
+        // A booked night still works as a CHECK-OUT day (it doesn't consume that night),
+        // so keep it clickable while we're picking an end date after a valid start.
+        clickable = !!(calStart && !calEnd && date > calStart);
+      } else{
+        cls += ' cal-day--free';
+        clickable = true;
+      }
 
       if(calStart && iso === toISO(calStart)) cls += ' cal-day--selected';
       if(calEnd && iso === toISO(calEnd)) cls += ' cal-day--selected';
@@ -1881,24 +1976,30 @@
     }
     grid.innerHTML = html;
 
-    grid.querySelectorAll('.cal-day--free, .cal-day--selected').forEach(btn => {
+    grid.querySelectorAll('.cal-day:not([disabled])').forEach(btn => {
+      if(btn.classList.contains('cal-day--empty')) return;
       btn.addEventListener('click', onCalDayClick);
     });
   }
 
   function onCalDayClick(e){
-    const iso = e.currentTarget.dataset.date;
+    const btn = e.currentTarget;
+    const iso = btn.dataset.date;
     const clicked = parseISO(iso);
+    const isBookedDay = btn.classList.contains('cal-day--booked');
 
     if(!calStart || calEnd){
+      if(isBookedDay) return;
       calStart = clicked;
       calEnd = null;
     } else if(clicked <= calStart){
+      if(isBookedDay) return;
       calStart = clicked;
       calEnd = null;
     } else if(isRangeFree(calStart, clicked)){
       calEnd = clicked;
     } else{
+      if(isBookedDay) return;
       calStart = clicked;
       calEnd = null;
     }
