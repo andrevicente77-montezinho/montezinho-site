@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MonteZinho — Lakeside House, Benavila, Alentejo</title>
+<meta name="description" content="MonteZinho, a house on the shore of the Maranhão reservoir in Benavila, Portalegre. Local accommodation with a pool, a 3-hectare olive grove and private water access.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --ink:#141414;
+    --ink-soft:#59605f;
+    --blue:#4f7a82;
+    --blue-deep:#1f3336;
+    --terracotta:#bcd4d8;
+    --olive:#b8794a;
+    --stone:#eef3f3;
+    --stone-line: rgba(20,20,20,0.12);
+    --warn:#a8503f;
+    --warn-bg:#f7ece9;
+    --radius: 2px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ul{list-style:none;}
+  button{font:inherit; cursor:pointer;}
+
+  .eyebrow{
+    font-size:0.75rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--blue);
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    margin:0;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--blue);
+    display:inline-block;
+  }
+  .eyebrow.on-dark{ color:#cfe0ea; }
+  .eyebrow.on-dark::before{ background:#cfe0ea; }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:1.3rem 6vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:background 0.4s ease, padding 0.4s ease, box-shadow .4s ease;
+  }
+  header.site-nav.scrolled{
+    background:rgba(252,251,247,0.92);
+    backdrop-filter:blur(8px);
+    padding:0.85rem 6vw;
+    box-shadow:0 1px 0 var(--stone-line);
+  }
+  header.site-nav:not(.scrolled) .brand,
+  header.site-nav:not(.scrolled) nav.links a,
+  header.site-nav:not(.scrolled) .nav-cta,
+  header.site-nav:not(.scrolled) .lang-switch a,
+  header.site-nav:not(.scrolled) .burger span{
+    color:var(--white);
+  }
+  header.site-nav:not(.scrolled) .nav-cta{ border-color:rgba(255,255,255,0.7); }
+  header.site-nav:not(.scrolled) .burger span{ background:var(--white); }
+  header.site-nav:not(.scrolled) .lang-switch a.active{ color:var(--terracotta); }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:0.65rem;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .brand img{ height:34px; width:auto; display:block; }
+  .brand .logo-dark{ display:none; }
+  header.site-nav:not(.scrolled) .brand .logo-light{ display:none; }
+  header.site-nav:not(.scrolled) .brand .logo-dark{ display:block; }
+
+  nav.links{
+    display:flex;
+    gap:2.2rem;
+    font-size:0.88rem;
+    font-weight:500;
+  }
+  nav.links a{
+    position:relative;
+    padding:0.2rem 0;
+    color:var(--ink);
+    transition:color .25s ease;
+  }
+  nav.links a::after{
+    content:"";
+    position:absolute; left:0; right:100%; bottom:-2px;
+    height:1px; background:var(--blue);
+    transition:right .3s ease;
+  }
+  nav.links a:hover,
+  nav.links a.active{ color:var(--blue); }
+  nav.links a:hover::after,
+  nav.links a.active::after{ right:0; }
+
+  .nav-cta{
+    border:1px solid var(--ink);
+    padding:0.5rem 1.15rem;
+    font-size:0.82rem;
+    font-weight:600;
+    transition: all .25s ease;
+  }
+  .nav-cta:hover{ background:var(--ink); color:var(--white); }
+
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+  }
+  .burger span{ width:24px; height:1.5px; background:var(--ink); display:block; }
+
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    margin-left:1.3rem;
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+  .lang-switch a{ color:var(--ink-soft); transition:color .2s ease; }
+  .lang-switch a:hover{ color:var(--ink); }
+  .lang-switch a.active{ color:var(--blue); }
+  footer .lang-switch a{ color:#9a9689; }
+  footer .lang-switch a:hover{ color:#fff; }
+  footer .lang-switch a.active{ color:var(--terracotta); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    padding:6.5rem 6vw 4rem;
+    position:relative;
+    background:
+      linear-gradient(100deg, rgba(20,20,20,0.72) 0%, rgba(20,20,20,0.42) 42%, rgba(20,20,20,0.12) 68%),
+      url('assets/photos/hero-lake.jpg') center 78% / cover no-repeat;
+  }
+  .hero-inner{
+    max-width:1180px;
+    margin:0 auto;
+    width:100%;
+    display:block;
+  }
+  .hero-copy{ max-width:640px; }
+  .hero h1{
+    font-size:clamp(2.8rem, 6.2vw, 5rem);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0.4rem 0 0.7rem;
+    color:var(--white);
+    text-shadow:0 2px 20px rgba(0,0,0,0.3);
+  }
+  .hero p.lede{
+    font-size:1.15rem;
+    color:#eef1ef;
+    max-width:38ch;
+    margin-bottom:1.1rem;
+    text-shadow:0 1px 12px rgba(0,0,0,0.25);
+  }
+  .hero .eyebrow{ color:var(--terracotta); text-shadow:0 1px 8px rgba(0,0,0,0.35); }
+  .hero .eyebrow::before{ background:var(--terracotta); }
+  .cta-row{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    padding:0.95rem 1.6rem;
+    font-size:0.88rem;
+    font-weight:600;
+    border-radius:var(--radius);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  }
+  .btn-primary{
+    background:var(--blue);
+    color:var(--white);
+  }
+  .btn-primary:hover{ background:var(--blue-deep); transform:translateY(-2px); }
+  .btn-ghost{
+    border:1px solid var(--ink);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ background:var(--ink); color:var(--white); transform:translateY(-2px); }
+  .hero .btn-ghost{ border-color:rgba(255,255,255,0.7); color:var(--white); }
+  .hero .btn-ghost:hover{ background:var(--white); color:var(--ink); }
+
+  .trust-row{
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    margin-top:0.7rem;
+    font-size:0.85rem;
+    color:#e4e7e4;
+    text-shadow:0 1px 8px rgba(0,0,0,0.3);
+  }
+  .trust-row strong{ color:var(--white); font-weight:700; }
+  .trust-sep{ opacity:0.6; }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2rem; left:6vw;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#e4e7e4;
+  }
+  .scroll-cue .line{
+    width:1px; height:34px;
+    background:rgba(255,255,255,0.5);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:"";
+    position:absolute; top:-100%; left:0; right:0; height:100%;
+    background:var(--terracotta);
+    animation:cue 1.8s ease-in-out infinite;
+  }
+  @keyframes cue{
+    0%{ top:-100%; }
+    50%{ top:0; }
+    100%{ top:100%; }
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    padding:7rem 0;
+    position:relative;
+  }
+  .section-head{
+    max-width:640px;
+    margin-bottom:3.5rem;
+  }
+  .section-head h2{
+    font-size:clamp(2.1rem, 4vw, 3rem);
+    margin-top:0.8rem;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    margin-top:1.1rem;
+    font-size:1.02rem;
+    max-width:52ch;
+  }
+
+  /* ---------- A CASA ---------- */
+  .casa-gallery{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:1rem;
+    margin-bottom:3.5rem;
+  }
+  .casa-gallery img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:var(--radius);
+    aspect-ratio:4/3;
+  }
+
+  .casa-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:4rem;
+    align-items:start;
+  }
+  .casa-copy p{
+    color:var(--ink-soft);
+    margin-bottom:1.1rem;
+    max-width:46ch;
+  }
+  .casa-copy .quote{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--ink);
+    border-left:3px solid var(--blue);
+    padding-left:1.2rem;
+    margin:1.8rem 0;
+    max-width:38ch;
+  }
+
+  .feature-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.6rem 2rem;
+  }
+  .feature-item{
+    display:flex;
+    gap:0.9rem;
+    align-items:flex-start;
+    padding-bottom:1.5rem;
+    border-bottom:1px solid var(--stone-line);
+  }
+  .feature-item svg{
+    width:26px; height:26px;
+    flex-shrink:0;
+    stroke:var(--blue);
+    margin-top:0.15rem;
+  }
+  .feature-item h3{
+    font-family:'Work Sans', sans-serif;
+    font-size:0.98rem;
+    font-weight:600;
+    margin-bottom:0.25rem;
+  }
+  .feature-item p{
+    font-size:0.87rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- EXTERIOR (dark band) ---------- */
+  .exterior{
+    background:var(--blue-deep);
+    color:#f2ede1;
+    overflow:hidden;
+  }
+  .exterior .section-head p{ color:#c3d2dc; }
+  .exterior .section-head h2{ color:#fff; }
+
+  .ext-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:rgba(255,255,255,0.14);
+    border-top:1px solid rgba(255,255,255,0.14);
+    border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .ext-card{
+    background:var(--blue-deep);
+    padding:2.4rem 2rem;
+    transition:background .3s ease;
+  }
+  .ext-card:hover{ background:#233f56; }
+  .ext-card svg{
+    width:30px; height:30px;
+    stroke:#e7b598;
+    margin-bottom:1.3rem;
+  }
+  .ext-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:1.1rem;
+    margin-bottom:0.5rem;
+  }
+  .ext-card p{
+    font-size:0.88rem;
+    color:#c3d2dc;
+  }
+
+  .ext-card--photo{
+    padding:0;
+    position:relative;
+    overflow:hidden;
+    min-height:280px;
+  }
+  .ext-card--photo img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .ext-card--photo:hover img{ transform:scale(1.05); }
+  .ext-card--photo img[src*="ext-lake.jpg"]{ object-position:center 84%; }
+  .ext-card--photo::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,30,32,0) 40%, rgba(15,25,28,0.88) 100%);
+    z-index:1;
+  }
+  .ext-card--photo .ext-card-text{
+    position:relative;
+    z-index:2;
+    padding:2.4rem 2rem;
+    margin-top:auto;
+    align-self:flex-end;
+  }
+  .ext-card--photo{ display:flex; flex-direction:column; }
+  .ext-card--photo:hover{ background:var(--blue-deep); }
+
+  /* ---------- GALERIA ---------- */
+  .gallery-category{
+    margin-bottom:2.8rem;
+  }
+  .gallery-category:last-child{ margin-bottom:0; }
+  .gallery-cat-title{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:0.02em;
+    color:var(--blue);
+    margin-bottom:1rem;
+    padding-bottom:0.6rem;
+    border-bottom:1px solid var(--stone-line);
+  }
+  .gallery-grid{
+    columns:4 220px;
+    column-gap:0.9rem;
+  }
+  .gallery-item{
+    display:block;
+    width:100%;
+    border:none;
+    background:none;
+    padding:0;
+    margin:0 0 0.9rem;
+    break-inside:avoid;
+    cursor:zoom-in;
+    border-radius:var(--radius);
+    overflow:hidden;
+    line-height:0;
+  }
+  .gallery-item img{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:transform .4s ease, filter .4s ease;
+  }
+  .gallery-item:hover img{
+    transform:scale(1.035);
+    filter:brightness(1.03);
+  }
+
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(10,10,10,0.94);
+    z-index:200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:4vh 4vw;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox-img{
+    max-width:100%;
+    max-height:88vh;
+    object-fit:contain;
+    border-radius:var(--radius);
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+    color:var(--white);
+    border-radius:50%;
+    width:44px; height:44px;
+    font-size:1.4rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s ease;
+  }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:rgba(255,255,255,0.2); }
+  .lightbox-close{ top:1.5rem; right:1.5rem; }
+  .lightbox-prev{ left:1.5rem; top:50%; transform:translateY(-50%); }
+  .lightbox-next{ right:1.5rem; top:50%; transform:translateY(-50%); }
+  .lightbox-counter{
+    position:absolute;
+    bottom:1.5rem; left:50%; transform:translateX(-50%);
+    color:#cfd6d4;
+    font-size:0.82rem;
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- AVALIAÇÕES ---------- */
+  .reviews-summary{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:3rem;
+    align-items:center;
+    padding:2rem 0 2.6rem;
+    border-bottom:1px solid var(--stone-line);
+    margin-bottom:2.6rem;
+  }
+  .reviews-score{ display:flex; flex-direction:column; gap:0.3rem; }
+  .reviews-score-num{
+    font-family:'Poppins', sans-serif;
+    font-weight:800;
+    font-size:3rem;
+    line-height:1;
+    color:var(--ink);
+  }
+  .reviews-stars{ color:var(--terracotta); font-size:1.1rem; letter-spacing:0.15em; }
+  .reviews-count{ font-size:0.85rem; color:var(--ink-soft); }
+  .reviews-bars{ display:flex; flex-direction:column; gap:0.55rem; }
+  .reviews-bar-row{
+    display:grid;
+    grid-template-columns:7rem 1fr 2rem;
+    align-items:center;
+    gap:0.8rem;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+  }
+  .reviews-bar-row span:last-child{ color:var(--ink); font-weight:600; text-align:right; }
+  .bar{ height:5px; background:var(--stone); border-radius:4px; overflow:hidden; }
+  .bar-fill{ height:100%; background:var(--blue); border-radius:4px; }
+
+  .reviews-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.6rem;
+  }
+  .review-card{
+    background:var(--stone);
+    border-radius:var(--radius);
+    padding:1.6rem 1.7rem;
+  }
+  .review-card--placeholder{
+    background:transparent;
+    border:1px dashed var(--stone-line);
+  }
+  .review-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:0.4rem;
+  }
+  .review-author{ font-family:'Poppins', sans-serif; font-weight:600; font-size:0.92rem; }
+  .review-date{ font-size:0.78rem; color:var(--ink-soft); }
+  .review-stars-small{ color:var(--terracotta); font-size:0.82rem; letter-spacing:0.12em; margin-bottom:0.6rem; }
+  .review-text{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    display:-webkit-box;
+    -webkit-line-clamp:5;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .review-card.expanded .review-text{
+    display:block;
+    -webkit-line-clamp:unset;
+    overflow:visible;
+  }
+  .review-toggle{
+    display:none;
+    margin-top:0.7rem;
+    background:none;
+    border:none;
+    padding:0;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:0.8rem;
+    color:var(--blue);
+    cursor:pointer;
+  }
+  .review-toggle:hover{ text-decoration:underline; }
+  .review-toggle.show{ display:inline-block; }
+  .reviews-placeholder-note{
+    text-align:center;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    margin-top:1.4rem;
+  }
+
+  /* ---------- CONTACTOS ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:4rem;
+  }
+  .booking-panel{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.5rem;
+    flex-wrap:wrap;
+    background:var(--stone);
+    border-radius:var(--radius);
+    padding:1.6rem 2rem;
+    margin-bottom:3rem;
+  }
+  .booking-panel h3{
+    font-family:'Poppins', sans-serif;
+    font-size:1.05rem;
+    font-weight:600;
+    margin-bottom:0.3rem;
+  }
+  .booking-panel p{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+  .booking-actions{
+    display:flex;
+    gap:0.8rem;
+    flex-wrap:wrap;
+  }
+  .booking-actions .btn{ padding:0.8rem 1.3rem; }
+  .contact-info .item{
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    margin-bottom:2rem;
+  }
+  .contact-info svg{
+    width:22px; height:22px;
+    stroke:var(--terracotta);
+    flex-shrink:0;
+    margin-top:0.2rem;
+  }
+  .contact-info h3{
+    font-family:'Work Sans', sans-serif;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:0.3rem;
+  }
+  .contact-info p, .contact-info a{
+    font-size:1rem;
+  }
+  .contact-info a:hover{ color:var(--blue); }
+
+  .map-card{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    margin:1.6rem 0;
+    border:1px solid var(--stone-line);
+  }
+  .map-card iframe{
+    width:100%;
+    height:220px;
+    border:0;
+    display:block;
+    filter:grayscale(0.15);
+  }
+  .map-cta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.5rem;
+    background:var(--blue);
+    color:var(--white);
+    font-size:0.85rem;
+    font-weight:600;
+    padding:0.75rem 1rem;
+    transition:background .2s ease;
+  }
+  .map-cta svg{ width:16px; height:16px; stroke:var(--white); flex-shrink:0; }
+  .map-cta:hover{ background:var(--blue-deep); }
+
+  .social-row{
+    display:flex;
+    gap:1rem;
+    margin-top:2rem;
+  }
+  .social-row a{
+    width:38px; height:38px;
+    border:1px solid var(--stone-line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .social-row a:hover{ background:var(--blue); border-color:var(--blue); }
+  .social-row a:hover svg{ stroke:#fff; }
+  .social-row svg{ width:16px; height:16px; stroke:var(--ink); }
+
+  form.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:1.4rem;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+  }
+  .field label{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .field input, .field textarea, .field select{
+    border:none;
+    border-bottom:1px solid var(--stone-line);
+    background:transparent;
+    padding:0.6rem 0.1rem;
+    font-family:'Work Sans', sans-serif;
+    font-size:1rem;
+    color:var(--ink);
+    transition:border-color .25s ease;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    outline:none;
+    border-color:var(--blue);
+  }
+  .field select{ cursor:pointer; }
+  .field textarea{ resize:vertical; min-height:100px; }
+  .field-hint{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    margin-top:-0.8rem;
+  }
+  .contact-form button{
+    align-self:flex-start;
+    margin-top:0.4rem;
+  }
+  .form-note{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:-0.6rem;
+  }
+  .submit-confirm{
+    display:none;
+    background:var(--stone);
+    border-left:3px solid var(--blue);
+    border-radius:var(--radius);
+    padding:1.1rem 1.4rem;
+    margin-top:-0.4rem;
+  }
+  .submit-confirm.show{ display:block; }
+  .submit-confirm .avail-status{ color:var(--blue-deep); margin-bottom:0.3rem; }
+
+  .availability-btn{ align-self:flex-start; margin-top:-0.4rem; }
+  .availability-btn:disabled{ opacity:0.5; cursor:wait; }
+
+  .cal-widget{
+    background:var(--white);
+    border:1px solid var(--stone-line);
+    border-radius:var(--radius);
+    padding:1.4rem 1.5rem;
+  }
+  .cal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:0.8rem;
+  }
+  .cal-header button{
+    width:30px; height:30px;
+    border-radius:50%;
+    border:1px solid var(--stone-line);
+    background:none;
+    cursor:pointer;
+    font-size:1.05rem;
+    line-height:1;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s ease;
+  }
+  .cal-header button:hover{ background:var(--stone); }
+  .cal-header span{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:0.9rem;
+    text-transform:capitalize;
+  }
+  .cal-sync-note{
+    font-size:0.74rem;
+    color:var(--ink-soft);
+    margin-bottom:0.6rem;
+    min-height:1em;
+  }
+  .cal-weekdays{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-bottom:0.35rem;
+  }
+  .cal-grid{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:3px;
+  }
+  .cal-day{
+    aspect-ratio:1;
+    border:none;
+    background:none;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.78rem;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    color:var(--ink);
+    transition:background .15s ease, color .15s ease;
+  }
+  .cal-day--empty{ cursor:default; }
+  .cal-day--past{ color:#d4d1c8; cursor:default; }
+  .cal-day--booked{
+    color:var(--warn);
+    text-decoration:line-through;
+    cursor:not-allowed;
+    background:var(--warn-bg);
+  }
+  .cal-day--free:hover{ background:var(--stone); }
+  .cal-day--selected{ background:var(--blue) !important; color:var(--white); }
+  .cal-day--inrange{ background:var(--stone); border-radius:0; }
+  .cal-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-top:1rem;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+  .cal-legend span{ display:flex; align-items:center; gap:0.4rem; }
+  .cal-dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .cal-dot--free{ background:var(--white); border:1px solid var(--stone-line); }
+  .cal-dot--booked{ background:var(--warn); }
+  .cal-dot--selected{ background:var(--blue); }
+
+  .sync-status{
+    font-size:0.76rem;
+    color:var(--ink-soft);
+    margin-top:-0.6rem;
+  }
+  .sync-status.sync-ok{ color:var(--blue); }
+  .sync-status.sync-err{ color:var(--warn); }
+
+  .availability-result{ display:none; }
+  .availability-result.show{ display:block; }
+  .avail-box{
+    border-radius:var(--radius);
+    padding:1.3rem 1.5rem;
+    margin-top:-0.4rem;
+  }
+  .avail-box.ok{ background:var(--stone); border-left:3px solid var(--blue); }
+  .avail-box.no{ background:var(--warn-bg); border-left:3px solid var(--warn); }
+  .avail-box.err{ background:var(--warn-bg); border-left:3px solid var(--warn); }
+  .avail-status{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:0.98rem;
+    margin-bottom:0.4rem;
+  }
+  .avail-box.ok .avail-status{ color:var(--blue-deep); }
+  .avail-box.no .avail-status, .avail-box.err .avail-status{ color:var(--warn); }
+  .avail-price{ font-size:0.92rem; color:var(--ink); margin-bottom:0.3rem; }
+  .avail-price strong{ font-weight:700; }
+  .avail-note{ font-size:0.82rem; color:var(--ink-soft); }
+  .avail-suggestions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    margin-top:0.8rem;
+  }
+  .avail-chip{
+    background:var(--white);
+    border:1px solid var(--stone-line);
+    border-radius:var(--radius);
+    padding:0.55rem 0.9rem;
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .avail-chip:hover{ border-color:var(--blue); color:var(--blue); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#d8d4c8;
+    padding:3.5rem 0 2rem;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:2rem;
+    padding-bottom:2.5rem;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  footer .brand{ color:#f2ede1; }
+  footer .brand img{ height:38px; width:auto; }
+  footer nav.links{ font-size:0.85rem; }
+  footer nav.links a{ color:#d8d4c8; }
+  footer nav.links a:hover{ color:#fff; }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    padding-top:1.6rem;
+    font-size:0.78rem;
+    color:#9a9689;
+    flex-wrap:wrap;
+    gap:0.8rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    nav.links, .nav-cta{ display:none; }
+    .burger{ display:flex; }
+    .lang-switch{ margin-left:0.8rem; gap:0.5rem; font-size:0.72rem; }
+    .hero{ background-position: 62% 78%; }
+    .casa-grid, .contact-grid{ grid-template-columns:1fr; }
+    .reviews-summary{ grid-template-columns:1fr; gap:1.6rem; }
+    .reviews-grid{ grid-template-columns:1fr; }
+    .casa-gallery{ grid-template-columns:1fr; }
+    .feature-list{ grid-template-columns:1fr 1fr; }
+    .ext-grid{ grid-template-columns:1fr; }
+    .gallery-grid{ columns:2 160px; }
+    .lightbox-prev{ left:0.5rem; }
+    .lightbox-next{ right:0.5rem; }
+    .form-row{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 560px){
+    .feature-list{ grid-template-columns:1fr; }
+    section{ padding:5rem 0; }
+    .hero{ padding-top:6.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+    .draw path, .draw line, .draw circle, .draw polyline{ stroke-dashoffset:0; }
+  }
+
+  :focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <a href="#top" class="brand">
+    <img src="assets/logo-mark.png" alt="MonteZinho" class="logo-light">
+    <img src="assets/logo-mark-dark.png" alt="MonteZinho" class="logo-dark">
+    <span>MonteZinho</span>
+  </a>
+  <nav class="links">
+    <a href="#casa" class="nav-link">The House</a>
+    <a href="#exterior" class="nav-link">Outdoors</a>
+    <a href="#galeria" class="nav-link">Gallery</a>
+    <a href="#avaliacoes" class="nav-link">Reviews</a>
+    <a href="#contactos" class="nav-link">Contact</a>
+  </nav>
+  <a href="#contactos" class="nav-cta">Book</a>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="index.html">PT</a>
+    <a href="en.html" class="active">EN</a>
+    <a href="fr.html">FR</a>
+    <a href="es.html">ES</a>
+  </nav>
+  <button class="burger" id="burgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Local Accommodation · Benavila, Alentejo</p>
+        <h1>MonteZinho</h1>
+        <p class="lede">A house by the water, on the shore of the Maranhão reservoir. Direct, private access to the lake, surrounded by a 3-hectare olive grove.</p>
+        <div class="cta-row">
+          <a href="#contactos" class="btn btn-primary">Book your stay</a>
+          <a href="#casa" class="btn btn-ghost">Discover the house</a>
+        </div>
+        <div class="trust-row">
+          <span><strong>5.0</strong> · rating</span>
+          <span class="trust-sep">·</span>
+          <span>22 reviews on Airbnb</span>
+          <span class="trust-sep">·</span>
+          <span>Guest favourite</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span> scroll</div>
+  </section>
+
+  <!-- A CASA -->
+  <section id="casa">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The House</p>
+        <h2>A space to slow down</h2>
+        <p>Renovated in 2023, on the shore of the Maranhão reservoir — comfort was updated inside, while the traditional Alentejo character was kept outside.</p>
+      </div>
+
+      <div class="casa-gallery">
+        <img src="assets/photos/casa-house.jpg" alt="MonteZinho house exterior, with blue shutters and traditional roof tiles">
+        <img src="assets/photos/casa-door.jpg" alt="MonteZinho's light blue front door">
+      </div>
+
+      <div class="casa-grid">
+        <div class="casa-copy">
+          <p>Ideal for 4 guests across 2 bedrooms. Inside, you'll find high ceilings, a workspace and a kitchen ready to use — outside, centuries-old olive trees and the quiet typical of inland Alentejo.</p>
+          <p class="quote">A place to return to what matters — the memories you already have, and the ones you'll build here.</p>
+          <p>During your stay, you have exclusive access to the whole property, except for the upper floor of the house.</p>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12h18M5 12V7a2 2 0 012-2h10a2 2 0 012 2v5M4 12v7h16v-7M8 19v2M16 19v2"/></svg>
+            <div><h3>2 Bedrooms · 4 guests</h3><p>Bedroom 1 with a queen bed; bedroom 2 with a bunk bed. Bed linen included.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21h16M6 21V9a2 2 0 012-2h8a2 2 0 012 2v12M9 21V13h6v8"/></svg>
+            <div><h3>1 Bathroom</h3><p>Full bathroom, with hot water and towels provided.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+            <div><h3>Fully equipped kitchen</h3><p>Ready to use for cooking at home during your stay.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="4" width="16" height="12" rx="1"/><path d="M2 20h20M9 8h6"/></svg>
+            <div><h3>Dedicated workspace</h3><p>A dedicated area for anyone who needs to work a few days from here.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 12.55a11 11 0 0114 0M8.5 16a6 6 0 017 0M12 20h.01"/></svg>
+            <div><h3>Free Wi-Fi</h3><p>Coverage throughout the house, for anyone who needs to stay reachable.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6V4M16 6V4M4 11h16"/></svg>
+            <div><h3>Free parking</h3><p>On site, one less thing to worry about on arrival.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTERIOR -->
+  <section id="exterior" class="exterior">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow on-dark">Outdoors</p>
+        <h2>Where the days grow longer</h2>
+        <p>A 3-hectare olive grove, a pool, and a five-minute walk to the lake — the rest takes care of itself.</p>
+      </div>
+    </div>
+
+    <div class="ext-grid">
+      <div class="ext-card ext-card--photo">
+        <img src="assets/photos/ext-pool.jpg" alt="MonteZinho pool, a converted irrigation tank">
+        <div class="ext-card-text">
+          <h3>Pool</h3>
+          <p>The old irrigation tank was converted into a bright pool, perfect for cooling off on hot Alentejo days.</p>
+        </div>
+      </div>
+      <div class="ext-card ext-card--photo">
+        <img src="assets/photos/ext-terrace.jpg" alt="Table set on the outdoor terrace at MonteZinho">
+        <div class="ext-card-text">
+          <h3>Terrace and pergola</h3>
+          <p>A wide west-facing terrace for long meals and conversations with family or friends.</p>
+        </div>
+      </div>
+      <div class="ext-card ext-card--photo">
+        <img src="assets/photos/ext-lake.jpg" alt="Canoe on the Maranhão reservoir, next to MonteZinho">
+        <div class="ext-card-text">
+          <h3>Lake access</h3>
+          <p>A five-minute walk through the olive grove to the Maranhão reservoir, for swimming in calm, quiet waters.</p>
+        </div>
+      </div>
+      <div class="ext-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 18h6l3-9h2M9 18l3-9-3-3H6"/></svg>
+        <h3>Bikes, canoe and SUP board</h3>
+        <p>Available at no extra cost, to explore the lake at your own pace.</p>
+      </div>
+      <div class="ext-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <h3>Yoga deck</h3>
+        <p>A wooden deck right by the water, just steps from the lake's edge.</p>
+      </div>
+      <div class="ext-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2c2 3 4 6 4 9a4 4 0 01-8 0c0-3 2-6 4-9zM12 15v7M7 22h10"/></svg>
+        <h3>3-hectare olive grove</h3>
+        <p>Hundreds of olive and fruit trees surround the house, with the quiet typical of inland Alentejo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Gallery</p>
+        <h2>Moments at MonteZinho</h2>
+        <p>A walk through the house and its surroundings, just as you'll find them.</p>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Living Room</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="0"><img src="assets/gallery/gallery-14.jpg" alt="MonteZinho living room" loading="lazy"></button>
+        <button class="gallery-item" data-index="1"><img src="assets/gallery/gallery-29.jpg" alt="Sofa detail in the MonteZinho living room" loading="lazy"></button>
+        <button class="gallery-item" data-index="2"><img src="assets/gallery/gallery-36.jpg" alt="MonteZinho living room" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Kitchen</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="3"><img src="assets/gallery/gallery-21.jpg" alt="MonteZinho kitchen and dining table" loading="lazy"></button>
+        <button class="gallery-item" data-index="4"><img src="assets/gallery/gallery-31.jpg" alt="MonteZinho fully equipped kitchen" loading="lazy"></button>
+        <button class="gallery-item" data-index="5"><img src="assets/gallery/gallery-30.jpg" alt="MonteZinho open-plan kitchen" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Dining Area</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="6"><img src="assets/gallery/gallery-17.jpg" alt="MonteZinho terrace with dining table" loading="lazy"></button>
+        <button class="gallery-item" data-index="7"><img src="assets/gallery/gallery-38.jpg" alt="Table set on the MonteZinho terrace" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Bedroom 1</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="8"><img src="assets/gallery/gallery-18.jpg" alt="MonteZinho Bedroom 1, with a queen bed" loading="lazy"></button>
+        <button class="gallery-item" data-index="9"><img src="assets/gallery/gallery-37.jpg" alt="MonteZinho Bedroom 1, with a queen bed and wardrobes" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Bedroom 2</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="10"><img src="assets/gallery/gallery-05.jpg" alt="MonteZinho Bedroom 2, with a bunk bed" loading="lazy"></button>
+        <button class="gallery-item" data-index="11"><img src="assets/gallery/gallery-10.jpg" alt="MonteZinho Bedroom 2, with a bunk bed" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Bathroom</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="12"><img src="assets/gallery/gallery-07.jpg" alt="Shower in the MonteZinho bathroom" loading="lazy"></button>
+        <button class="gallery-item" data-index="13"><img src="assets/gallery/gallery-11.jpg" alt="MonteZinho bathroom" loading="lazy"></button>
+        <button class="gallery-item" data-index="14"><img src="assets/gallery/gallery-22.jpg" alt="Towels available at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="15"><img src="assets/gallery/gallery-28.jpg" alt="Sink in the MonteZinho bathroom" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Outdoors</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="16"><img src="assets/gallery/gallery-01.jpg" alt="Aerial view of MonteZinho, surrounded by the olive grove and next to the reservoir" loading="lazy"></button>
+        <button class="gallery-item" data-index="17"><img src="assets/gallery/gallery-02.jpg" alt="Aerial view of the MonteZinho property and the Maranhão reservoir" loading="lazy"></button>
+        <button class="gallery-item" data-index="18"><img src="assets/gallery/gallery-04.jpg" alt="View over the reservoir, next to MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="19"><img src="assets/gallery/gallery-06.jpg" alt="Lounge chairs on the MonteZinho terrace" loading="lazy"></button>
+        <button class="gallery-item" data-index="20"><img src="assets/gallery/gallery-08.jpg" alt="Wooden pergola overlooking the reservoir, at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="21"><img src="assets/gallery/gallery-09.jpg" alt="MonteZinho's light blue front door" loading="lazy"></button>
+        <button class="gallery-item" data-index="22"><img src="assets/gallery/gallery-13.jpg" alt="Aerial view of the reservoir's edge, next to MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="23"><img src="assets/gallery/gallery-16.jpg" alt="Wooden pergola over the water, at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="24"><img src="assets/gallery/gallery-20.jpg" alt="Aerial view of MonteZinho with the pool" loading="lazy"></button>
+        <button class="gallery-item" data-index="25"><img src="assets/gallery/gallery-23.jpg" alt="Aerial view of the MonteZinho pool" loading="lazy"></button>
+        <button class="gallery-item" data-index="26"><img src="assets/gallery/gallery-24.jpg" alt="Outdoor shower next to the MonteZinho pool" loading="lazy"></button>
+        <button class="gallery-item" data-index="27"><img src="assets/gallery/gallery-25.jpg" alt="MonteZinho pool lit up at dusk" loading="lazy"></button>
+        <button class="gallery-item" data-index="28"><img src="assets/gallery/gallery-27.jpg" alt="Entrance path at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="29"><img src="assets/gallery/gallery-33.jpg" alt="MonteZinho exterior, among olive trees" loading="lazy"></button>
+        <button class="gallery-item" data-index="30"><img src="assets/gallery/gallery-34.jpg" alt="Chairs on the pergola overlooking the reservoir, at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="31"><img src="assets/gallery/gallery-35.jpg" alt="MonteZinho pool" loading="lazy"></button>
+        <button class="gallery-item" data-index="32"><img src="assets/gallery/gallery-40.jpg" alt="Wooden dock on the reservoir, next to MonteZinho" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="wrap gallery-category">
+      <h3 class="gallery-cat-title">Other</h3>
+      <div class="gallery-grid">
+        <button class="gallery-item" data-index="33"><img src="assets/gallery/gallery-03.jpg" alt="Bikes available at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="34"><img src="assets/gallery/gallery-12.jpg" alt="Canoe and life jackets available at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="35"><img src="assets/gallery/gallery-15.jpg" alt="SUP board available at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="36"><img src="assets/gallery/gallery-19.jpg" alt="Footwear available for MonteZinho guests" loading="lazy"></button>
+        <button class="gallery-item" data-index="37"><img src="assets/gallery/gallery-26.jpg" alt="Evening walk by the reservoir, at MonteZinho" loading="lazy"></button>
+        <button class="gallery-item" data-index="38"><img src="assets/gallery/gallery-32.jpg" alt="Canoe on the reservoir's shore, at the end of the day" loading="lazy"></button>
+        <button class="gallery-item" data-index="39"><img src="assets/gallery/gallery-39.jpg" alt="Canoeing on the Maranhão reservoir" loading="lazy"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÕES -->
+  <section id="avaliacoes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Reviews</p>
+        <h2>What guests say</h2>
+        <p>Real reviews from guests who have stayed at MonteZinho, via Airbnb.</p>
+      </div>
+
+      <div class="reviews-summary">
+        <div class="reviews-score">
+          <span class="reviews-score-num">5,0</span>
+          <span class="reviews-stars">★★★★★</span>
+          <span class="reviews-count">24 reviews · Guest favourite</span>
+        </div>
+        <div class="reviews-bars">
+          <div class="reviews-bar-row"><span>Cleanliness</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+          <div class="reviews-bar-row"><span>Accuracy</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+          <div class="reviews-bar-row"><span>Check-in</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+          <div class="reviews-bar-row"><span>Communication</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+          <div class="reviews-bar-row"><span>Location</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+          <div class="reviews-bar-row"><span>Value</span><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span>5,0</span></div>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="review-author">Ana</span>
+            <span class="review-date">July 2026</span>
+          </div>
+          <p class="review-stars-small">★★★★★</p>
+          <p class="review-text">We had a wonderful stay at MonteZinho. Super peaceful area, the house is very comfortable and has everything you need. It has direct access to an inlet of the Maranhão reservoir, and a private deck right by the water. Beautiful scenery. André was always very helpful and friendly! We recommend it for a calm family getaway!</p>
+          <button type="button" class="review-toggle">Read more</button>
+        </div>
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="review-author">Mariana</span>
+            <span class="review-date">July 2026</span>
+          </div>
+          <p class="review-stars-small">★★★★★</p>
+          <p class="review-text">We loved our stay at Montezinho and couldn't recommend it more! It's such a beautiful, peaceful place right by the reservoir. We loved being able to simply grab a canoe or a paddleboard and head out onto the water — and having all the equipment ready to use was fantastic. There's also a wonderful shaded area by the water with chairs and a hammock, perfect for relaxing or having a picnic. The house was lovely and had everything we needed. The terrace and the fire pit were a real highlight, the bedding was amazing, and the cool air conditioning was much appreciated! André was the perfect host — genuinely impeccable, very helpful and welcoming, even letting us do a late check-out, which we really appreciated. Such a special place. We had the best time and would come back in a heartbeat. I couldn't recommend Montezinho more highly!</p>
+          <button type="button" class="review-toggle">Read more</button>
+        </div>
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="review-author">Carolina</span>
+            <span class="review-date">June 2026</span>
+          </div>
+          <p class="review-stars-small">★★★★★</p>
+          <p class="review-text">Without a doubt a wonderful space, perfect for resting. The house is impeccably equipped. Lovely surrounding area, especially the outdoor porch. The owner takes great care to provide not only all the necessary information, but is always available to meet our needs. The direct, private access to the reservoir makes the days even more enjoyable. We have every amenity at our disposal. The experience was extremely positive, and the photos fully match the excellent condition of the house.</p>
+          <button type="button" class="review-toggle">Read more</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTOS -->
+  <section id="contactos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's arrange your stay</h2>
+        <p>No middlemen — bookings are made directly with me, by phone or email. I reply as quickly as possible.</p>
+      </div>
+
+      <div class="booking-panel">
+        <div>
+          <h3>Book your stay</h3>
+          <p>Check-in after 4:00 PM · Check-out until 11:00 AM · Maximum 4 guests</p>
+        </div>
+        <div class="booking-actions">
+          <a href="tel:+351914432980" class="btn btn-primary">Call now</a>
+          <a href="mailto:montezinho.al@gmail.com" class="btn btn-ghost">Send email</a>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <h3>Location</h3>
+              <p>Benavila, Portalegre<br>Alentejo, Portugal</p>
+            </div>
+          </div>
+
+          <div class="map-card">
+            <iframe src="https://www.google.com/maps?q=39.09925,-7.88025&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MonteZinho location on Google Maps"></iframe>
+            <a class="map-cta" href="https://www.google.com/maps/dir/?api=1&destination=39.09925,-7.88025" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 11l18-7-7 18-3-8-8-3z"/></svg>
+              Get directions on Google Maps
+            </a>
+          </div>
+          <div class="item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2.2z"/></svg>
+            <div>
+              <h3>Phone</h3>
+              <a href="tel:+351914432980">+351 914 432 980</a>
+            </div>
+          </div>
+          <div class="item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <div>
+              <h3>Email</h3>
+              <a href="mailto:montezinho.al@gmail.com">montezinho.al@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="social-row">
+            <a href="https://www.instagram.com/monte_zinho/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="https://www.facebook.com/profile.php?id=61592313771478" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://wa.me/351914432980" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></a>
+          </div>
+        </div>
+
+        <form class="contact-form" action="mailto:montezinho.al@gmail.com?subject=MonteZinho%20%E2%80%93%20Pedido%20de%20reserva%20%2F%20Booking%20request" method="post" enctype="text/plain" id="contactForm">
+          <div class="cal-widget">
+            <div class="cal-header">
+              <button type="button" id="calPrev" aria-label="Previous month">&#8249;</button>
+              <span id="calMonthLabel"></span>
+              <button type="button" id="calNext" aria-label="Next month">&#8250;</button>
+            </div>
+            <p id="calSyncNote" class="cal-sync-note"></p>
+            <div class="cal-weekdays">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="cal-legend">
+              <span><i class="cal-dot cal-dot--free"></i> Available</span>
+              <span><i class="cal-dot cal-dot--booked"></i> Booked</span>
+              <span><i class="cal-dot cal-dot--selected"></i> Selected</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="entrada">Check-in</label>
+              <input type="date" id="entrada" name="entrada" required>
+            </div>
+            <div class="field">
+              <label for="saida">Check-out</label>
+              <input type="date" id="saida" name="saida" required>
+            </div>
+          </div>
+          <p class="field-hint">I accept check-out and check-in from other guests on the same day.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="hospedes">Number of guests</label>
+              <select id="hospedes" name="hospedes">
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="animais">Are you bringing pets?</label>
+              <select id="animais" name="animais">
+                <option value="nao">No</option>
+                <option value="sim">Yes (+€40)</option>
+              </select>
+            </div>
+          </div>
+          <p class="field-hint">MonteZinho welcomes a maximum of 4 guests.</p>
+
+          <button type="button" id="checkAvailabilityBtn" class="btn btn-ghost availability-btn">Check availability and price</button>
+          <p id="syncStatus" class="sync-status"></p>
+          <div id="availabilityResult" class="availability-result"></div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="nome">Name</label>
+              <input type="text" id="nome" name="nome" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="mensagem">Message</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Tell us how many guests, and what you're looking for in your stay."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send request</button>
+          <p class="form-note">When you submit, your email app will open with this message ready to send to montezinho.al@gmail.com.</p>
+          <div id="submitConfirm" class="submit-confirm">
+            <p class="avail-status">✓ Request ready</p>
+            <p class="avail-note">Your email app should have opened, with the message already filled in. Once you send it, we'll get back to you shortly.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a href="#top" class="brand">
+        <img src="assets/logo-mark-dark.png" alt="MonteZinho">
+        <span>MonteZinho</span>
+      </a>
+      <nav class="links">
+        <a href="#casa">The House</a>
+        <a href="#exterior">Outdoors</a>
+        <a href="#galeria">Gallery</a>
+        <a href="#avaliacoes">Reviews</a>
+        <a href="#contactos">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 MonteZinho — Benavila, Portalegre · AL 144255/AL</span>
+      <nav class="lang-switch">
+        <a href="index.html">PT</a>
+        <a href="en.html" class="active">EN</a>
+        <a href="fr.html">FR</a>
+        <a href="es.html">ES</a>
+      </nav>
+    </div>
+  </div></footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Foto seguinte">&#8250;</button>
+  <p class="lightbox-counter" id="lightboxCounter"></p>
+</div>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Active link highlighting
+  const links = document.querySelectorAll('.nav-link');
+  const sections = ['casa','exterior','galeria','avaliacoes','contactos'].map(id => document.getElementById(id));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector('.nav-link[href="#' + entry.target.id + '"]');
+        if(active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => s && observer.observe(s));
+
+  // Mobile menu (simple toggle -> reuses nav.links as dropdown)
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.querySelector('nav.links');
+  burger.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.position = 'fixed';
+    navLinks.style.top = '64px';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = '#fcfbf7';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.padding = '1.5rem 6vw';
+    navLinks.style.gap = '1.2rem';
+    navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    if(window.innerWidth <= 900) navLinks.style.display = 'none';
+  }));
+
+  // ---------- AVAILABILITY & PRICE CHECKER ----------
+  // Link de exportação do calendário do Airbnb (Calendário → Disponibilidade →
+  // Sincronizar calendários → Exportar calendário). Deixe como '' para desativar
+  // a sincronização automática e usar apenas a lista BOOKED_RANGES abaixo.
+  //
+  // NOTA DE PRIVACIDADE: como o site não tem servidor próprio, este link fica
+  // visível a quem inspecionar o código da página (não dá acesso à sua conta,
+  // só mostra que datas estão ocupadas). Se isso for um problema, use o método
+  // alternativo com Cloudflare Workers descrito em airbnb-sync-worker.js.
+  const AIRBNB_ICAL_URL = 'https://www.airbnb.pt/calendar/ical/659762472429599000.ics?t=51914c22ac214493af47b1708c0cfd42';
+
+  // Serviço gratuito que permite ao browser ler o calendário do Airbnb (ver nota acima).
+  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
+  // EDIT THIS LIST for bookings made directly (phone, email) that are NOT on Airbnb.
+  // Bookings made through Airbnb are synced automatically once AIRBNB_ICAL_URL is set above.
+  // 'start' = check-in date, 'end' = check-out date (the format is 'YYYY-MM-DD').
+  // Example: { start: '2026-08-10', end: '2026-08-17' },
+  const BOOKED_RANGES = [
+    // { start: '2026-08-10', end: '2026-08-17' },
+  ];
+
+  // Populated automatically from Airbnb, in addition to BOOKED_RANGES above. Do not edit.
+  let SYNCED_RANGES = [];
+  let syncStatus = AIRBNB_ICAL_URL ? 'loading' : 'off';
+
+  // Price list — this is the ONLY source of truth for which dates can be booked.
+  // A date is bookable if, and only if, it appears in this list below (its price is
+  // the value shown). Any date NOT listed here — past or future — is treated as
+  // unavailable, even if it looks free. To open up a new date for booking, add it
+  // here with its nightly price; to close a date, remove its line.
+  // EDIT this list whenever the price list changes (e.g. MZ_Pricelist_2026.xlsx).
+  const AVAILABLE_DATES = {
+    '2026-08-19': 290,
+    '2026-08-20': 290,
+    '2026-08-21': 300,
+    '2026-08-22': 320,
+    '2026-08-23': 300,
+    '2026-09-04': 230,
+    '2026-09-05': 250,
+    '2026-09-06': 200,
+    '2026-09-07': 200,
+    '2026-09-08': 200,
+    '2026-09-09': 200,
+    '2026-09-10': 200,
+    '2026-09-11': 225,
+    '2026-09-12': 250,
+    '2026-09-13': 190,
+    '2026-09-14': 190,
+    '2026-09-15': 190,
+    '2026-09-16': 190,
+    '2026-09-17': 190,
+    '2026-09-18': 220,
+    '2026-09-19': 240,
+    '2026-09-20': 180,
+    '2026-09-21': 180,
+    '2026-09-22': 180,
+    '2026-09-23': 180,
+    '2026-09-24': 180,
+    '2026-09-25': 210,
+    '2026-09-26': 230,
+  };
+
+  const CLEANING_FEE = 80;   // EDIT: fixed cleaning fee, in euros (0 if none)
+  const PET_FEE = 40;        // EDIT: fixed fee if guests are bringing pets, in euros
+
+  const MIN_NIGHTS_DEFAULT = 3;  // EDIT: minimum nights per stay
+  const MIN_NIGHTS_AUGUST = 5;   // EDIT: minimum nights for stays starting in August
+
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const MONTH_FULL_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function parseISO(str){
+    const [y,m,d] = str.split('-').map(Number);
+    return new Date(Date.UTC(y, m-1, d));
+  }
+  function toISO(date){
+    return date.toISOString().slice(0,10);
+  }
+  function addDays(date, n){
+    const d = new Date(date);
+    d.setUTCDate(d.getUTCDate() + n);
+    return d;
+  }
+  function daysBetween(a, b){
+    return Math.round((b - a) / 86400000);
+  }
+  function formatShort(date){
+    return date.getUTCDate() + ' ' + MONTH_NAMES[date.getUTCMonth()];
+  }
+  function rangesOverlap(aStart, aEnd, bStart, bEnd){
+    return aStart < bEnd && aEnd > bStart;
+  }
+  function isDateAvailable(date){
+    return Object.prototype.hasOwnProperty.call(AVAILABLE_DATES, toISO(date));
+  }
+  function isRangeFree(start, end){
+    for(let n = new Date(start); n < end; n = addDays(n, 1)){
+      if(!isDateAvailable(n)) return false;
+    }
+    const all = BOOKED_RANGES.concat(SYNCED_RANGES);
+    return !all.some(r => rangesOverlap(start, end, parseISO(r.start), parseISO(r.end)));
+  }
+  function getMinNights(start){
+    return start.getUTCMonth() === 7 ? MIN_NIGHTS_AUGUST : MIN_NIGHTS_DEFAULT; // month 7 = August
+  }
+  function rateForNight(night){
+    return AVAILABLE_DATES[toISO(night)];
+  }
+  function nightlyBreakdown(start, end){
+    const rates = [];
+    for(let n = new Date(start); n < end; n = addDays(n, 1)){
+      rates.push(rateForNight(n));
+    }
+    return rates;
+  }
+  function findAlternative(start, end, direction, maxDays){
+    const nights = daysBetween(start, end);
+    const today = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
+    for(let offset = 1; offset <= maxDays; offset++){
+      const s = addDays(start, direction * offset);
+      const e = addDays(s, nights);
+      if(direction < 0 && s < today) return null;
+      if(isRangeFree(s, e)) return { start: s, end: e };
+    }
+    return null;
+  }
+  function priceFor(start, end, hasPets){
+    const rates = nightlyBreakdown(start, end);
+    const lodging = rates.reduce((sum, r) => sum + r, 0);
+    return lodging + CLEANING_FEE + (hasPets ? PET_FEE : 0);
+  }
+
+  const entradaInput = document.getElementById('entrada');
+  const saidaInput = document.getElementById('saida');
+  const animaisSelect = document.getElementById('animais');
+  const hospedesSelect = document.getElementById('hospedes');
+  const checkBtn = document.getElementById('checkAvailabilityBtn');
+  const resultBox = document.getElementById('availabilityResult');
+  const mensagemField = document.getElementById('mensagem');
+  const syncStatusEl = document.getElementById('syncStatus');
+
+  function renderSyncStatus(){
+    if(!syncStatusEl) return;
+    if(syncStatus === 'off'){
+      syncStatusEl.textContent = '';
+      syncStatusEl.className = 'sync-status';
+    } else if(syncStatus === 'loading'){
+      syncStatusEl.textContent = 'Syncing Airbnb calendar…';
+      syncStatusEl.className = 'sync-status';
+      checkBtn.disabled = true;
+    } else if(syncStatus === 'ok'){
+      syncStatusEl.textContent = '✓ Calendar synced with Airbnb';
+      syncStatusEl.className = 'sync-status sync-ok';
+      checkBtn.disabled = false;
+    } else if(syncStatus === 'error'){
+      syncStatusEl.textContent = 'Could not sync with Airbnb — only checking manually recorded bookings.';
+      syncStatusEl.className = 'sync-status sync-err';
+      checkBtn.disabled = false;
+    }
+  }
+
+  // Lê o texto do calendário (.ics) do Airbnb e extrai as datas de cada reserva.
+  function parseICalBusyRanges(icalText){
+    const ranges = [];
+    const events = icalText.split('BEGIN:VEVENT');
+    for(let i = 1; i < events.length; i++){
+      const block = events[i];
+      const startMatch = block.match(/DTSTART[^:\r\n]*:(\d{8})/);
+      const endMatch = block.match(/DTEND[^:\r\n]*:(\d{8})/);
+      if(startMatch && endMatch){
+        ranges.push({
+          start: startMatch[1].slice(0,4) + '-' + startMatch[1].slice(4,6) + '-' + startMatch[1].slice(6,8),
+          end: endMatch[1].slice(0,4) + '-' + endMatch[1].slice(4,6) + '-' + endMatch[1].slice(6,8)
+        });
+      }
+    }
+    return ranges;
+  }
+
+  async function syncAvailability(){
+    if(!AIRBNB_ICAL_URL){ syncStatus = 'off'; renderSyncStatus(); return; }
+    syncStatus = 'loading';
+    renderSyncStatus();
+    try{
+      const res = await fetch(CORS_PROXY + encodeURIComponent(AIRBNB_ICAL_URL), { cache: 'no-store' });
+      if(!res.ok) throw new Error('bad response');
+      const icalText = await res.text();
+      SYNCED_RANGES = parseICalBusyRanges(icalText);
+      syncStatus = 'ok';
+    } catch(err){
+      syncStatus = 'error';
+    }
+    renderSyncStatus();
+    if(typeof renderCalendar === 'function') renderCalendar();
+  }
+  syncAvailability();
+  // Retry sync every hour while the page stays open
+  if(AIRBNB_ICAL_URL){ setInterval(syncAvailability, 60 * 60 * 1000); }
+
+  function renderError(msg){
+    resultBox.innerHTML = '<div class="avail-box err"><p class="avail-status">' + msg + '</p></div>';
+    resultBox.classList.add('show');
+  }
+
+  function renderResult(){
+    const startVal = entradaInput.value;
+    const endVal = saidaInput.value;
+    if(!startVal || !endVal){
+      renderError('Please choose your check-in and check-out dates.');
+      return;
+    }
+    const start = parseISO(startVal);
+    const end = parseISO(endVal);
+    const today = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
+    const hasPets = animaisSelect && animaisSelect.value === 'sim';
+
+    if(start < today){
+      renderError('That check-in date has already passed. Please choose a future date.');
+      return;
+    }
+    const nights = daysBetween(start, end);
+    const minNights = getMinNights(start);
+    if(nights < minNights){
+      renderError('Minimum stay of ' + minNights + ' nights' + (start.getUTCMonth() === 7 ? ' in August' : '') + '.');
+      return;
+    }
+
+    if(isRangeFree(start, end)){
+      const rates = nightlyBreakdown(start, end);
+      const lodging = rates.reduce((sum, r) => sum + r, 0);
+      const total = lodging + CLEANING_FEE + (hasPets ? PET_FEE : 0);
+      const sameRate = rates.every(r => r === rates[0]);
+      let html = '<div class="avail-box ok">';
+      html += '<p class="avail-status">✓ Dates available</p>';
+      if(sameRate){
+        html += '<p class="avail-price">' + nights + ' nights × €' + rates[0] + ' = <strong>€' + lodging + '</strong></p>';
+      } else {
+        html += '<p class="avail-price">' + nights + ' nights (mixed rate): <strong>€' + lodging + '</strong></p>';
+      }
+      html += '<p class="avail-price">Cleaning fee: <strong>€' + CLEANING_FEE + '</strong></p>';
+      if(hasPets){
+        html += '<p class="avail-price">Pets: <strong>€' + PET_FEE + '</strong></p>';
+      }
+      html += '<p class="avail-price">Estimated total: <strong>€' + total + '</strong></p>';
+      html += '<p class="avail-note">This booking is confirmed once I validate it by phone or email.</p>';
+      html += '</div>';
+      resultBox.innerHTML = html;
+      resultBox.classList.add('show');
+      if(mensagemField && !mensagemField.value){
+        const guestCount = hospedesSelect ? hospedesSelect.value : '';
+        mensagemField.value = 'I would like to book from ' + formatShort(start) + ' to ' + formatShort(end) + ' (' + nights + ' nights) for ' + guestCount + ' guests' +
+          (hasPets ? ', bringing pets' : '') + '. Estimated total: €' + total + '.';
+      }
+    } else {
+      const later = findAlternative(start, end, 1, 90);
+      const earlier = findAlternative(start, end, -1, 90);
+      let html = '<div class="avail-box no">';
+      html += '<p class="avail-status">✕ Those dates are already booked</p>';
+      const alts = [earlier, later].filter(Boolean);
+      if(alts.length){
+        html += '<p class="avail-note">Nearby available dates:</p>';
+        html += '<div class="avail-suggestions">';
+        alts.forEach(alt => {
+          const altTotal = priceFor(alt.start, alt.end, hasPets);
+          html += '<button type="button" class="avail-chip" data-start="' + toISO(alt.start) + '" data-end="' + toISO(alt.end) + '">' +
+            formatShort(alt.start) + ' – ' + formatShort(alt.end) + ' · ' + altTotal + '€</button>';
+        });
+        html += '</div>';
+      } else {
+        html += '<p class="avail-note">I couldn\'t find free dates nearby. Please contact me directly so we can find an alternative.</p>';
+      }
+      html += '</div>';
+      resultBox.innerHTML = html;
+      resultBox.classList.add('show');
+      resultBox.querySelectorAll('.avail-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          entradaInput.value = chip.dataset.start;
+          saidaInput.value = chip.dataset.end;
+          calStart = parseISO(chip.dataset.start);
+          calEnd = parseISO(chip.dataset.end);
+          calViewYear = calStart.getUTCFullYear();
+          calViewMonth = calStart.getUTCMonth();
+          renderCalendar();
+          renderResult();
+        });
+      });
+    }
+  }
+
+  checkBtn.addEventListener('click', renderResult);
+
+  // ---------- SUBMIT CONFIRMATION ----------
+  const contactFormEl = document.getElementById('contactForm');
+  const submitConfirmEl = document.getElementById('submitConfirm');
+  if(contactFormEl && submitConfirmEl){
+    contactFormEl.addEventListener('submit', () => {
+      submitConfirmEl.classList.add('show');
+      setTimeout(() => {
+        submitConfirmEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 200);
+    });
+  }
+
+  // ---------- BOOKING CALENDAR ----------
+  let calViewYear, calViewMonth, calStart = null, calEnd = null;
+
+  function isBookedOrSynced(date){
+    const all = BOOKED_RANGES.concat(SYNCED_RANGES);
+    return all.some(r => date >= parseISO(r.start) && date < parseISO(r.end));
+  }
+
+  // A date shows as booked/blocked in the calendar if it's not in the price list, if it's
+  // already booked, OR if the run of consecutive available nights it belongs to is shorter
+  // than the minimum-nights requirement for a stay starting on that run — since no valid
+  // booking could actually be made there anyway.
+  function isDateBooked(date){
+    if(!isDateAvailable(date)) return true;
+    if(isBookedOrSynced(date)) return true;
+
+    let runStart = new Date(date);
+    while(isDateAvailable(addDays(runStart, -1)) && !isBookedOrSynced(addDays(runStart, -1))){
+      runStart = addDays(runStart, -1);
+    }
+    let runEnd = new Date(date);
+    while(isDateAvailable(addDays(runEnd, 1)) && !isBookedOrSynced(addDays(runEnd, 1))){
+      runEnd = addDays(runEnd, 1);
+    }
+    const runLength = daysBetween(runStart, runEnd) + 1;
+    return runLength < getMinNights(runStart);
+  }
+
+  function renderCalendar(){
+    const grid = document.getElementById('calGrid');
+    const label = document.getElementById('calMonthLabel');
+    const syncNote = document.getElementById('calSyncNote');
+    if(!grid || !label) return;
+
+    const firstOfMonth = new Date(Date.UTC(calViewYear, calViewMonth, 1));
+    const startWeekday = firstOfMonth.getUTCDay();
+    const daysInMonth = new Date(Date.UTC(calViewYear, calViewMonth + 1, 0)).getUTCDate();
+    const today = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
+
+    label.textContent = MONTH_FULL_NAMES[calViewMonth] + ' ' + calViewYear;
+    if(syncNote){
+      syncNote.textContent = syncStatus === 'ok' ? 'Calendar synced with Airbnb.' :
+        (syncStatus === 'loading' ? 'Syncing with Airbnb…' : '');
+    }
+
+    let html = '';
+    for(let i = 0; i < startWeekday; i++){ html += '<span class="cal-day cal-day--empty"></span>'; }
+    for(let d = 1; d <= daysInMonth; d++){
+      const date = new Date(Date.UTC(calViewYear, calViewMonth, d));
+      const iso = toISO(date);
+      let cls = 'cal-day';
+      let clickable = true;
+
+      if(date < today){ cls += ' cal-day--past'; clickable = false; }
+      else if(isDateBooked(date)){ cls += ' cal-day--booked'; clickable = false; }
+      else{ cls += ' cal-day--free'; }
+
+      if(calStart && iso === toISO(calStart)) cls += ' cal-day--selected';
+      if(calEnd && iso === toISO(calEnd)) cls += ' cal-day--selected';
+      if(calStart && calEnd && date > calStart && date < calEnd) cls += ' cal-day--inrange';
+
+      html += '<button type="button" class="' + cls + '" data-date="' + iso + '"' + (clickable ? '' : ' disabled') + '>' + d + '</button>';
+    }
+    grid.innerHTML = html;
+
+    grid.querySelectorAll('.cal-day--free, .cal-day--selected').forEach(btn => {
+      btn.addEventListener('click', onCalDayClick);
+    });
+  }
+
+  function onCalDayClick(e){
+    const iso = e.currentTarget.dataset.date;
+    const clicked = parseISO(iso);
+
+    if(!calStart || calEnd){
+      calStart = clicked;
+      calEnd = null;
+    } else if(clicked <= calStart){
+      calStart = clicked;
+      calEnd = null;
+    } else if(isRangeFree(calStart, clicked)){
+      calEnd = clicked;
+    } else{
+      calStart = clicked;
+      calEnd = null;
+    }
+
+    entradaInput.value = calStart ? toISO(calStart) : '';
+    saidaInput.value = calEnd ? toISO(calEnd) : '';
+    renderCalendar();
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    calViewMonth--;
+    if(calViewMonth < 0){ calViewMonth = 11; calViewYear--; }
+    renderCalendar();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    calViewMonth++;
+    if(calViewMonth > 11){ calViewMonth = 0; calViewYear = calViewYear + 1; }
+    renderCalendar();
+  });
+
+  entradaInput.addEventListener('change', () => {
+    calStart = entradaInput.value ? parseISO(entradaInput.value) : null;
+    if(calStart){ calViewYear = calStart.getUTCFullYear(); calViewMonth = calStart.getUTCMonth(); }
+    renderCalendar();
+  });
+  saidaInput.addEventListener('change', () => {
+    calEnd = saidaInput.value ? parseISO(saidaInput.value) : null;
+    renderCalendar();
+  });
+
+  (function initCalendar(){
+    const today = new Date();
+    calViewYear = today.getFullYear();
+    calViewMonth = today.getMonth();
+
+    const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+    const futureAvailable = Object.keys(AVAILABLE_DATES)
+      .map(parseISO)
+      .filter(d => d >= todayUTC)
+      .sort((a, b) => a - b);
+    const hasAvailabilityThisMonth = futureAvailable.some(d => d.getUTCFullYear() === calViewYear && d.getUTCMonth() === calViewMonth);
+    if(!hasAvailabilityThisMonth && futureAvailable.length){
+      calViewYear = futureAvailable[0].getUTCFullYear();
+      calViewMonth = futureAvailable[0].getUTCMonth();
+    }
+    renderCalendar();
+  })();
+
+  // ---------- REVIEW "READ MORE" ----------
+  document.querySelectorAll('.review-card').forEach(card => {
+    const text = card.querySelector('.review-text');
+    const btn = card.querySelector('.review-toggle');
+    if(!text || !btn) return;
+    if(text.scrollHeight > text.clientHeight + 2){
+      btn.classList.add('show');
+      btn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Read less' : 'Read more';
+      });
+    }
+  });
+
+  // ---------- GALLERY LIGHTBOX ----------
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  let currentGalleryIndex = 0;
+
+  function openLightbox(index){
+    currentGalleryIndex = index;
+    updateLightboxImage();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function updateLightboxImage(){
+    const img = galleryItems[currentGalleryIndex].querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCounter.textContent = (currentGalleryIndex + 1) + ' / ' + galleryItems.length;
+  }
+  function showNext(){
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+    updateLightboxImage();
+  }
+  function showPrev(){
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+    updateLightboxImage();
+  }
+
+  galleryItems.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxNext').addEventListener('click', showNext);
+  document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') showNext();
+    if(e.key === 'ArrowLeft') showPrev();
+  });
+</script>
+
+</body>
+</html>
