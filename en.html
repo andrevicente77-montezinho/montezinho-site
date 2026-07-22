@@ -862,6 +862,39 @@
     color:var(--ink-soft);
     font-weight:600;
   }
+  .field-time{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:-0.35rem;
+  }
+  .date-field-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .date-field-wrap input[type="date"]{
+    width:100%;
+    color:transparent;
+  }
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit,
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit-text,
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit-month-field,
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit-day-field,
+  .date-field-wrap input[type="date"]::-webkit-datetime-edit-year-field{
+    color:transparent;
+  }
+  .field-date-overlay{
+    position:absolute;
+    left:0.1rem;
+    top:50%;
+    transform:translateY(-50%);
+    pointer-events:none;
+    font-family:'Inter', sans-serif;
+    font-size:1rem;
+    color:var(--ink);
+    white-space:nowrap;
+  }
   .field input, .field textarea, .field select{
     border:none;
     border-bottom:1px solid var(--stone-line);
@@ -982,6 +1015,11 @@
     cursor:not-allowed;
     background:var(--warn-bg);
   }
+  .cal-day--checkout-only{
+    color:var(--olive);
+    cursor:pointer;
+    background:var(--sand);
+  }
   .cal-day--free:hover{ background:var(--stone); }
   .cal-day--selected{ background:var(--blue) !important; color:var(--white); }
   .cal-day--inrange{ background:var(--sand); border-radius:0; }
@@ -997,6 +1035,7 @@
   .cal-dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
   .cal-dot--free{ background:var(--white); border:1px solid var(--stone-line); }
   .cal-dot--booked{ background:var(--warn); }
+  .cal-dot--checkout-only{ background:var(--olive); }
   .cal-dot--selected{ background:var(--blue); }
 
   .sync-status{
@@ -1050,7 +1089,7 @@
 
   /* ---------- FOOTER ---------- */
   footer{
-    background:var(--ink);
+    background:var(--blue-deep);
     color:#d8d4c8;
     padding:3.5rem 0 2rem;
   }
@@ -1177,7 +1216,7 @@
       <div class="section-head">
         <p class="eyebrow">The House</p>
         <h2>A space to slow down</h2>
-        <p>Renovated in 2023, on the shore of the Maranhão reservoir — comfort was updated inside, while the traditional Alentejo character was kept outside.</p>
+        <p>Renovated in 2023, on the shore of the Maranhão reservoir — the interior comfort was updated, while the traditional Alentejo character was kept outside. </p>
       </div>
 
       <div class="casa-gallery">
@@ -1203,7 +1242,7 @@
           </div>
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-            <div><h3>Fully equipped kitchen</h3><p>Ready to use for cooking at home during your stay.</p></div>
+            <div><h3>Fully equipped kitchen</h3><p>With everything you need for your stay.</p></div>
           </div>
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="4" width="16" height="12" rx="1"/><path d="M2 20h20M9 8h6"/></svg>
@@ -1214,8 +1253,16 @@
             <div><h3>Free Wi-Fi</h3><p>Coverage throughout the house, for anyone who needs to stay reachable.</p></div>
           </div>
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6V4M16 6V4M4 11h16"/></svg>
-            <div><h3>Free parking</h3><p>On site, one less thing to worry about on arrival.</p></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="6" width="18" height="6" rx="1"/><path d="M7 16v2M12 16v2M17 16v2"/></svg>
+            <div><h3>Air conditioning</h3><p>In every room of the house, for comfort in any season.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="12" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+            <div><h3>Cable TV</h3><p>Cable TV channels available in the living room.</p></div>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="10" width="16" height="8" rx="1"/><path d="M4 10l2-6h12l2 6M8 14h.01M12 14h.01M16 14h.01"/></svg>
+            <div><h3>Charcoal barbecue</h3><p>Available outdoors, for evenings spent together in the open air.</p></div>
           </div>
         </div>
       </div>
@@ -1228,7 +1275,7 @@
       <div class="section-head">
         <p class="eyebrow on-dark">Outdoors</p>
         <h2>Where the days grow longer</h2>
-        <p>A 3-hectare olive grove, a pool, and a five-minute walk to the lake — the rest takes care of itself.</p>
+        <p>A 3-hectare olive grove, a sunlit pool, and just a five-minute walk away… the breathtaking waters of the Maranhão reservoir.</p>
       </div>
     </div>
 
@@ -1312,7 +1359,7 @@
         <span class="gallery-cover-label">Outdoors</span>
       </button>
       <button class="gallery-cover" data-cat="cat-outros">
-        <img src="assets/gallery/gallery-39.jpg" alt="Canoeing on the Maranhão reservoir" loading="lazy">
+        <img src="assets/gallery/gallery-15.jpg" alt="SUP board available at MonteZinho" loading="lazy">
         <span class="gallery-cover-label">Other</span>
       </button>
     </div>
@@ -1496,17 +1543,6 @@
         <p>No middlemen — bookings are made directly with us, by phone or email. We reply as quickly as possible.</p>
       </div>
 
-      <div class="booking-panel">
-        <div>
-          <h3>Book your stay</h3>
-          <p>Check-in after 4:00 PM · Check-out until 11:00 AM · Maximum 4 guests</p>
-        </div>
-        <div class="booking-actions">
-          <a href="tel:+351914432980" class="btn btn-primary">Call now</a>
-          <a href="mailto:montezinho.al@gmail.com" class="btn btn-ghost">Send email</a>
-        </div>
-      </div>
-
       <div class="contact-grid">
         <div class="contact-info">
           <div class="item">
@@ -1561,6 +1597,7 @@
             <div class="cal-legend">
               <span><i class="cal-dot cal-dot--free"></i> Available</span>
               <span><i class="cal-dot cal-dot--booked"></i> Booked</span>
+              <span><i class="cal-dot cal-dot--checkout-only"></i> Check-out only</span>
               <span><i class="cal-dot cal-dot--selected"></i> Selected</span>
             </div>
           </div>
@@ -1568,11 +1605,19 @@
           <div class="form-row">
             <div class="field">
               <label for="entrada">Check-in</label>
-              <input type="date" id="entrada" name="entrada" required>
+              <span class="field-time">From 4:00 PM</span>
+              <div class="date-field-wrap">
+                <input type="date" id="entrada" name="entrada" required>
+                <span class="field-date-overlay" id="entradaDisplay"></span>
+              </div>
             </div>
             <div class="field">
               <label for="saida">Check-out</label>
-              <input type="date" id="saida" name="saida" required>
+              <span class="field-time">Until 11:00 AM</span>
+              <div class="date-field-wrap">
+                <input type="date" id="saida" name="saida" required>
+                <span class="field-date-overlay" id="saidaDisplay"></span>
+              </div>
             </div>
           </div>
 
@@ -1615,7 +1660,7 @@
             <textarea id="mensagem" name="mensagem" placeholder="Tell us how many guests, and what you're looking for in your stay."></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send request</button>
-          <p class="form-note">When you submit, your email app will open with this message ready to send to montezinho.al@gmail.com.</p>
+          <p class="form-note">When you submit your request, your email app will open with this message ready to send to montezinho.al@gmail.com.</p>
           <div id="submitConfirm" class="submit-confirm">
             <p class="avail-status">✓ Request ready</p>
             <p class="avail-note">Your email app should have opened, with the message already filled in. Once you send it, we'll get back to you shortly.</p>
@@ -1814,6 +1859,13 @@
   function formatShort(date){
     return date.getUTCDate() + ' ' + MONTH_NAMES[date.getUTCMonth()];
   }
+  const WEEKDAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  function formatFull(date){
+    const dd = String(date.getUTCDate()).padStart(2, '0');
+    const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const yyyy = date.getUTCFullYear();
+    return WEEKDAY_NAMES[date.getUTCDay()] + ', ' + dd + '/' + mm + '/' + yyyy;
+  }
   function rangesOverlap(aStart, aEnd, bStart, bEnd){
     return aStart < bEnd && aEnd > bStart;
   }
@@ -1968,7 +2020,7 @@
       if(hasPets){
         html += '<p class="avail-price">Pets: <strong>€' + PET_FEE + '</strong></p>';
       }
-      html += '<p class="avail-price">Estimated total: <strong>€' + total + '</strong></p>';
+      html += '<p class="avail-price">Total Price: <strong>€' + total + '</strong></p>';
       html += '<p class="avail-note">This booking is confirmed once we validate it by phone or email.</p>';
       html += '</div>';
       resultBox.innerHTML = html;
@@ -1976,7 +2028,7 @@
       if(mensagemField && !mensagemField.value){
         const guestCount = hospedesSelect ? hospedesSelect.value : '';
         mensagemField.value = 'I would like to book from ' + formatShort(start) + ' to ' + formatShort(end) + ' (' + nights + ' nights) for ' + guestCount + ' guests' +
-          (hasPets ? ', bringing pets' : '') + '. Estimated total: €' + total + '.';
+          (hasPets ? ', bringing pets' : '') + '. Total Price: €' + total + '.';
       }
     } else {
       const later = findAlternative(start, end, 1, 90);
@@ -2008,6 +2060,7 @@
           calViewYear = calStart.getUTCFullYear();
           calViewMonth = calStart.getUTCMonth();
           renderCalendar();
+          updateDateDisplays();
           renderResult();
         });
       });
@@ -2036,8 +2089,8 @@
 
       const nome = nomeInput.value.trim();
       const emailVal = emailInput.value.trim();
-      const checkin = entradaInput.value ? formatShort(parseISO(entradaInput.value)) : '—';
-      const checkout = saidaInput.value ? formatShort(parseISO(saidaInput.value)) : '—';
+      const checkin = entradaInput.value ? formatFull(parseISO(entradaInput.value)) : '—';
+      const checkout = saidaInput.value ? formatFull(parseISO(saidaInput.value)) : '—';
       const guests = GUEST_LABELS[hospedesSelect.value] || (hospedesSelect.value + ' guests');
       const pets = (animaisSelect && animaisSelect.value === 'sim') ? 'Yes (+€40)' : 'No';
       const msg = mensagemField.value.trim();
@@ -2077,6 +2130,13 @@
   function isBookedOrSynced(date){
     const all = BOOKED_RANGES.concat(SYNCED_RANGES);
     return all.some(r => date >= parseISO(r.start) && date < parseISO(r.end));
+  }
+
+  // A date that isn't bookable as a night can still work as a CHECK-OUT day, as long as
+  // the night right before it is free — since a checkout doesn't consume that date's own night.
+  function isCheckoutOnly(date){
+    const prev = addDays(date, -1);
+    return isDateAvailable(prev) && !isBookedOrSynced(prev);
   }
 
   // A date shows as booked/blocked in the calendar if it's not in the price list, if it's
@@ -2128,7 +2188,7 @@
 
       if(isPast){ cls += ' cal-day--past'; clickable = false; }
       else if(isBooked){
-        cls += ' cal-day--booked';
+        cls += isCheckoutOnly(date) ? ' cal-day--checkout-only' : ' cal-day--booked';
         // A booked night still works as a CHECK-OUT day (it doesn't consume that night),
         // so keep it clickable while we're picking an end date after a valid start.
         clickable = !!(calStart && !calEnd && date > calStart);
@@ -2155,7 +2215,7 @@
     const btn = e.currentTarget;
     const iso = btn.dataset.date;
     const clicked = parseISO(iso);
-    const isBookedDay = btn.classList.contains('cal-day--booked');
+    const isBookedDay = btn.classList.contains('cal-day--booked') || btn.classList.contains('cal-day--checkout-only');
 
     if(!calStart || calEnd){
       if(isBookedDay) return;
@@ -2176,6 +2236,7 @@
     entradaInput.value = calStart ? toISO(calStart) : '';
     saidaInput.value = calEnd ? toISO(calEnd) : '';
     renderCalendar();
+    updateDateDisplays();
   }
 
   document.getElementById('calPrev').addEventListener('click', () => {
@@ -2189,14 +2250,27 @@
     renderCalendar();
   });
 
+  function updateDateDisplays(){
+    const entradaDisplay = document.getElementById('entradaDisplay');
+    const saidaDisplay = document.getElementById('saidaDisplay');
+    if(entradaDisplay){
+      entradaDisplay.textContent = entradaInput.value ? formatFull(parseISO(entradaInput.value)) : 'Select a date';
+    }
+    if(saidaDisplay){
+      saidaDisplay.textContent = saidaInput.value ? formatFull(parseISO(saidaInput.value)) : 'Select a date';
+    }
+  }
+
   entradaInput.addEventListener('change', () => {
     calStart = entradaInput.value ? parseISO(entradaInput.value) : null;
     if(calStart){ calViewYear = calStart.getUTCFullYear(); calViewMonth = calStart.getUTCMonth(); }
     renderCalendar();
+    updateDateDisplays();
   });
   saidaInput.addEventListener('change', () => {
     calEnd = saidaInput.value ? parseISO(saidaInput.value) : null;
     renderCalendar();
+    updateDateDisplays();
   });
 
   (function initCalendar(){
@@ -2215,6 +2289,7 @@
       calViewMonth = futureAvailable[0].getUTCMonth();
     }
     renderCalendar();
+    updateDateDisplays();
   })();
 
   // ---------- REVIEW "READ MORE" ----------
