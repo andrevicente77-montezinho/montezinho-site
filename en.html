@@ -454,19 +454,82 @@
   .ext-card--photo:hover{ background:var(--blue-deep); }
 
   /* ---------- GALERIA ---------- */
-  .gallery-category{
-    margin-bottom:2.8rem;
+  .gallery-covers{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1.1rem;
   }
-  .gallery-category:last-child{ margin-bottom:0; }
-  .gallery-cat-title{
+  .gallery-cover{
+    position:relative;
+    aspect-ratio:4/3;
+    border:none;
+    padding:0;
+    border-radius:var(--radius);
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .gallery-cover img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .gallery-cover:hover img{ transform:scale(1.06); }
+  .gallery-cover::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(15,20,22,0) 45%, rgba(15,20,22,0.72) 100%);
+  }
+  .gallery-cover-label{
+    position:absolute;
+    left:1.1rem; bottom:0.9rem;
+    z-index:2;
+    color:var(--white);
     font-family:'Cormorant Garamond', serif;
     font-weight:600;
-    font-size:1rem;
-    letter-spacing:0.02em;
-    color:var(--blue);
-    margin-bottom:1rem;
-    padding-bottom:0.6rem;
-    border-bottom:1px solid var(--stone-line);
+    font-style:italic;
+    font-size:1.3rem;
+    text-shadow:0 1px 8px rgba(0,0,0,0.3);
+  }
+
+  .cat-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:190;
+    background:rgba(15,20,22,0.92);
+    padding:6vh 5vw;
+    overflow-y:auto;
+  }
+  .cat-overlay.open{ display:block; }
+  .cat-overlay-inner{
+    position:relative;
+    max-width:1100px;
+    margin:0 auto;
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:2.2rem;
+  }
+  .cat-overlay-close{
+    position:absolute;
+    top:1rem; right:1rem;
+    width:40px; height:40px;
+    border-radius:50%;
+    border:1px solid var(--stone-line);
+    background:var(--white);
+    font-size:1.4rem;
+    line-height:1;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .cat-overlay-close:hover{ background:var(--stone); }
+  .cat-overlay-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.7rem;
+    margin-bottom:1.6rem;
   }
   .gallery-grid{
     columns:4 220px;
@@ -1027,12 +1090,16 @@
     .fab-whatsapp svg{ width:22px; height:22px; }
     .fab-book{ padding:0.7rem 1.1rem; font-size:0.82rem; }
     .casa-grid, .contact-grid{ grid-template-columns:1fr; }
+    .contact-info{ order:2; }
+    .contact-form{ order:1; }
     .reviews-summary{ grid-template-columns:1fr; gap:1.6rem; }
     .reviews-grid{ grid-template-columns:1fr; }
     .casa-gallery{ grid-template-columns:1fr; }
     .feature-list{ grid-template-columns:1fr 1fr; }
     .ext-grid{ grid-template-columns:1fr; }
     .gallery-grid{ columns:2 160px; }
+    .gallery-covers{ grid-template-columns:repeat(2, 1fr); gap:0.8rem; }
+    .cat-overlay-inner{ padding:1.4rem; }
     .lightbox-prev{ left:0.5rem; }
     .lightbox-next{ right:0.5rem; }
     .form-row{ grid-template-columns:1fr; }
@@ -1215,61 +1282,116 @@
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Living Room</h3>
-      <div class="gallery-grid">
+    <div class="gallery-covers wrap">
+      <button class="gallery-cover" data-cat="cat-sala">
+        <img src="assets/gallery/gallery-14.jpg" alt="MonteZinho living room" loading="lazy">
+        <span class="gallery-cover-label">Living Room</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-cozinha">
+        <img src="assets/gallery/gallery-31.jpg" alt="MonteZinho fully equipped kitchen" loading="lazy">
+        <span class="gallery-cover-label">Kitchen</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-refeicoes">
+        <img src="assets/gallery/gallery-38.jpg" alt="Table set on the MonteZinho terrace" loading="lazy">
+        <span class="gallery-cover-label">Dining Area</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-quarto1">
+        <img src="assets/gallery/gallery-37.jpg" alt="MonteZinho Bedroom 1, with a queen bed and wardrobes" loading="lazy">
+        <span class="gallery-cover-label">Bedroom 1</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-quarto2">
+        <img src="assets/gallery/gallery-10.jpg" alt="MonteZinho Bedroom 2, with a bunk bed" loading="lazy">
+        <span class="gallery-cover-label">Bedroom 2</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-banho">
+        <img src="assets/gallery/gallery-28.jpg" alt="Sink in the MonteZinho bathroom" loading="lazy">
+        <span class="gallery-cover-label">Bathroom</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-exterior">
+        <img src="assets/gallery/gallery-20.jpg" alt="Aerial view of MonteZinho with the pool" loading="lazy">
+        <span class="gallery-cover-label">Outdoors</span>
+      </button>
+      <button class="gallery-cover" data-cat="cat-outros">
+        <img src="assets/gallery/gallery-39.jpg" alt="Canoeing on the Maranhão reservoir" loading="lazy">
+        <span class="gallery-cover-label">Other</span>
+      </button>
+    </div>
+
+    <div class="cat-overlay" id="cat-sala">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Living Room</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="0"><img src="assets/gallery/gallery-14.jpg" width="720" height="480" alt="MonteZinho living room" loading="lazy"></button>
         <button class="gallery-item" data-index="1"><img src="assets/gallery/gallery-29.jpg" width="720" height="900" alt="Sofa detail in the MonteZinho living room" loading="lazy"></button>
         <button class="gallery-item" data-index="2"><img src="assets/gallery/gallery-36.jpg" width="720" height="540" alt="MonteZinho living room" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Kitchen</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-cozinha">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Kitchen</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="3"><img src="assets/gallery/gallery-21.jpg" width="720" height="480" alt="MonteZinho kitchen and dining table" loading="lazy"></button>
         <button class="gallery-item" data-index="4"><img src="assets/gallery/gallery-31.jpg" width="720" height="900" alt="MonteZinho fully equipped kitchen" loading="lazy"></button>
         <button class="gallery-item" data-index="5"><img src="assets/gallery/gallery-30.jpg" width="720" height="900" alt="MonteZinho open-plan kitchen" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Dining Area</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-refeicoes">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Dining Area</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="6"><img src="assets/gallery/gallery-17.jpg" width="720" height="480" alt="MonteZinho terrace with dining table" loading="lazy"></button>
         <button class="gallery-item" data-index="7"><img src="assets/gallery/gallery-38.jpg" width="720" height="480" alt="Table set on the MonteZinho terrace" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Bedroom 1</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-quarto1">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Bedroom 1</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="8"><img src="assets/gallery/gallery-18.jpg" width="720" height="480" alt="MonteZinho Bedroom 1, with a queen bed" loading="lazy"></button>
         <button class="gallery-item" data-index="9"><img src="assets/gallery/gallery-37.jpg" width="720" height="540" alt="MonteZinho Bedroom 1, with a queen bed and wardrobes" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Bedroom 2</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-quarto2">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Bedroom 2</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="10"><img src="assets/gallery/gallery-05.jpg" width="720" height="720" alt="MonteZinho Bedroom 2, with a bunk bed" loading="lazy"></button>
         <button class="gallery-item" data-index="11"><img src="assets/gallery/gallery-10.jpg" width="720" height="480" alt="MonteZinho Bedroom 2, with a bunk bed" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Bathroom</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-banho">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Bathroom</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="12"><img src="assets/gallery/gallery-07.jpg" width="720" height="1080" alt="Shower in the MonteZinho bathroom" loading="lazy"></button>
         <button class="gallery-item" data-index="13"><img src="assets/gallery/gallery-11.jpg" width="720" height="960" alt="MonteZinho bathroom" loading="lazy"></button>
         <button class="gallery-item" data-index="14"><img src="assets/gallery/gallery-22.jpg" width="720" height="480" alt="Towels available at MonteZinho" loading="lazy"></button>
         <button class="gallery-item" data-index="15"><img src="assets/gallery/gallery-28.jpg" width="720" height="900" alt="Sink in the MonteZinho bathroom" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Outdoors</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-exterior">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Outdoors</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="16"><img src="assets/gallery/gallery-01.jpg" width="720" height="405" alt="Aerial view of MonteZinho, surrounded by the olive grove and next to the reservoir" loading="lazy"></button>
         <button class="gallery-item" data-index="17"><img src="assets/gallery/gallery-02.jpg" width="720" height="306" alt="Aerial view of the MonteZinho property and the Maranhão reservoir" loading="lazy"></button>
         <button class="gallery-item" data-index="18"><img src="assets/gallery/gallery-04.jpg" width="720" height="960" alt="View over the reservoir, next to MonteZinho" loading="lazy"></button>
@@ -1287,12 +1409,15 @@
         <button class="gallery-item" data-index="30"><img src="assets/gallery/gallery-34.jpg" width="720" height="540" alt="Chairs on the pergola overlooking the reservoir, at MonteZinho" loading="lazy"></button>
         <button class="gallery-item" data-index="31"><img src="assets/gallery/gallery-35.jpg" width="720" height="480" alt="MonteZinho pool" loading="lazy"></button>
         <button class="gallery-item" data-index="32"><img src="assets/gallery/gallery-40.jpg" width="720" height="720" alt="Wooden dock on the reservoir, next to MonteZinho" loading="lazy"></button>
+        </div>
       </div>
     </div>
 
-    <div class="wrap gallery-category">
-      <h3 class="gallery-cat-title">Other</h3>
-      <div class="gallery-grid">
+    <div class="cat-overlay" id="cat-outros">
+      <div class="cat-overlay-inner">
+        <button class="cat-overlay-close" data-cat-close aria-label="Fechar">&times;</button>
+        <h3 class="cat-overlay-title">Other</h3>
+        <div class="gallery-grid">
         <button class="gallery-item" data-index="33"><img src="assets/gallery/gallery-03.jpg" width="720" height="540" alt="Bikes available at MonteZinho" loading="lazy"></button>
         <button class="gallery-item" data-index="34"><img src="assets/gallery/gallery-12.jpg" width="720" height="540" alt="Canoe and life jackets available at MonteZinho" loading="lazy"></button>
         <button class="gallery-item" data-index="35"><img src="assets/gallery/gallery-15.jpg" width="720" height="540" alt="SUP board available at MonteZinho" loading="lazy"></button>
@@ -1300,6 +1425,7 @@
         <button class="gallery-item" data-index="37"><img src="assets/gallery/gallery-26.jpg" width="720" height="960" alt="Evening walk by the reservoir, at MonteZinho" loading="lazy"></button>
         <button class="gallery-item" data-index="38"><img src="assets/gallery/gallery-32.jpg" width="720" height="540" alt="Canoe on the reservoir's shore, at the end of the day" loading="lazy"></button>
         <button class="gallery-item" data-index="39"><img src="assets/gallery/gallery-39.jpg" width="720" height="480" alt="Canoeing on the Maranhão reservoir" loading="lazy"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -1420,7 +1546,7 @@
           </div>
         </div>
 
-        <form class="contact-form" action="mailto:montezinho.al@gmail.com?subject=MonteZinho%20%E2%80%93%20Pedido%20de%20reserva%20%2F%20Booking%20request" method="post" enctype="text/plain" id="contactForm">
+        <form class="contact-form" id="contactForm">
           <div class="cal-widget">
             <div class="cal-header">
               <button type="button" id="calPrev" aria-label="Previous month">&#8249;</button>
@@ -1890,11 +2016,54 @@
 
   checkBtn.addEventListener('click', renderResult);
 
-  // ---------- SUBMIT CONFIRMATION ----------
+  // ---------- FORM SUBMISSION (built as a clean mailto: link via JS, to avoid the
+  // browser's "insecure form" warning triggered by native form-to-mailto submissions,
+  // and to control exactly how the email is formatted) ----------
   const contactFormEl = document.getElementById('contactForm');
   const submitConfirmEl = document.getElementById('submitConfirm');
+  const nomeInput = document.getElementById('nome');
+  const emailInput = document.getElementById('email');
+
+  const GUEST_LABELS = { '1': '1 guest', '2': '2 guests', '3': '3 guests', '4': '4 guests' };
+
   if(contactFormEl && submitConfirmEl){
-    contactFormEl.addEventListener('submit', () => {
+    contactFormEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(!contactFormEl.checkValidity()){
+        contactFormEl.reportValidity();
+        return;
+      }
+
+      const nome = nomeInput.value.trim();
+      const emailVal = emailInput.value.trim();
+      const checkin = entradaInput.value ? formatShort(parseISO(entradaInput.value)) : '—';
+      const checkout = saidaInput.value ? formatShort(parseISO(saidaInput.value)) : '—';
+      const guests = GUEST_LABELS[hospedesSelect.value] || (hospedesSelect.value + ' guests');
+      const pets = (animaisSelect && animaisSelect.value === 'sim') ? 'Yes (+€40)' : 'No';
+      const msg = mensagemField.value.trim();
+
+      const subject = 'MonteZinho – Booking request from ' + nome;
+      const bodyLines = [
+        'New booking request — MonteZinho',
+        '',
+        'Name: ' + nome,
+        'Email: ' + emailVal,
+        'Check-in: ' + checkin,
+        'Check-out: ' + checkout,
+        'Guests: ' + guests,
+        'Pets: ' + pets,
+        '',
+        'Message:',
+        (msg || '(no additional message)'),
+      ];
+      const body = bodyLines.join('\n');
+
+      const mailtoUrl = 'mailto:montezinho.al@gmail.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailtoUrl;
+
       submitConfirmEl.classList.add('show');
       setTimeout(() => {
         submitConfirmEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -2060,6 +2229,35 @@
         btn.textContent = expanded ? 'Read less' : 'Read more';
       });
     }
+  });
+
+  // ---------- GALLERY CATEGORY OVERLAYS ----------
+  document.querySelectorAll('.gallery-cover').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const overlay = document.getElementById(btn.dataset.cat);
+      if(!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeCatOverlay(overlay){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.cat-overlay-close').forEach(btn => {
+    btn.addEventListener('click', () => closeCatOverlay(btn.closest('.cat-overlay')));
+  });
+  document.querySelectorAll('.cat-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) closeCatOverlay(overlay);
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key !== 'Escape') return;
+    const lb = document.getElementById('lightbox');
+    if(lb && lb.classList.contains('open')) return;
+    const openOverlay = document.querySelector('.cat-overlay.open');
+    if(openOverlay) closeCatOverlay(openOverlay);
   });
 
   // ---------- GALLERY LIGHTBOX ----------
