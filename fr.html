@@ -967,6 +967,29 @@
     align-self:flex-start;
     margin-top:0.4rem;
   }
+  .terms-check{
+    display:flex;
+    align-items:flex-start;
+    gap:0.65rem;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    cursor:pointer;
+    margin-top:-0.5rem;
+  }
+  .terms-check input{
+    flex-shrink:0;
+    width:17px;
+    height:17px;
+    margin-top:0.15rem;
+    accent-color:var(--blue);
+    cursor:pointer;
+  }
+  .terms-check a{
+    color:var(--blue-deep);
+    text-decoration:underline;
+    font-weight:600;
+  }
   .form-note{
     font-size:0.78rem;
     color:var(--ink-soft);
@@ -1719,6 +1742,10 @@
             <label for="mensagem">Message</label>
             <textarea id="mensagem" name="mensagem" placeholder="Indiquez-nous le nombre de personnes et ce que vous recherchez pour votre séjour."></textarea>
           </div>
+          <label class="terms-check">
+            <input type="checkbox" id="termsCheck" name="termsCheck" required>
+            <span>J'ai lu et j'accepte les <a href="termos.html" target="_blank" rel="noopener">Conditions de réservation</a> et la <a href="privacidade.html" target="_blank" rel="noopener">Politique de confidentialité</a>.</span>
+          </label>
           <button type="submit" class="btn btn-primary">Envoyer la demande</button>
           <p class="form-note">En envoyant votre demande, votre messagerie s'ouvrira avec ce message prêt à envoyer à montezinho.al@gmail.com.</p>
           <div id="submitConfirm" class="submit-confirm">
