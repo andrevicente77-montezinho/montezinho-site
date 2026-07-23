@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
+    --bar-h: 44px;
     --white:#f4f9fb;
     --ink:#2c2c2c;
     --ink-soft:#757473;
@@ -28,7 +29,7 @@
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth; scroll-padding-top:88px;}
+  html{scroll-behavior:smooth; scroll-padding-top:calc(88px + var(--bar-h) - 44px);}
   body{
     background:var(--white);
     color:var(--ink);
@@ -80,7 +81,7 @@
   /* ---------- NAV ---------- */
   header.site-nav{
     position:fixed;
-    top:0; left:0; right:0;
+    top:var(--bar-h); left:0; right:0;
     z-index:100;
     padding:1.3rem 6vw;
     display:flex;
@@ -184,12 +185,58 @@
     min-height:100vh;
     display:flex;
     align-items:flex-start;
-    padding:5.6rem 6vw 4rem;
+    padding:calc(5.6rem + var(--bar-h)) 6vw 4rem;
     position:relative;
     background:
       linear-gradient(100deg, rgba(20,20,20,0.72) 0%, rgba(20,20,20,0.42) 42%, rgba(20,20,20,0.12) 68%),
       url('assets/photos/hero-lake.jpg') center 78% / cover no-repeat;
   }
+  .promo-bar{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:110;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.4rem 0.9rem;
+    background:var(--sand);
+    color:#3a2f1f;
+    text-decoration:none;
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    padding:0.5rem 1rem;
+    text-align:center;
+  }
+  .promo-bar:hover{ background:#e4d7bf; }
+  .promo-bar-text strong{
+    display:inline-flex;
+    align-items:center;
+    font-weight:700;
+    color:var(--white);
+    background:var(--blue-deep);
+    padding:0.28rem 0.7rem;
+    border-radius:100px;
+    margin-right:0.5rem;
+    letter-spacing:0.01em;
+  }
+  .promo-bar-cta{
+    display:flex;
+    align-items:center;
+    gap:0.35rem;
+    font-weight:700;
+    white-space:nowrap;
+    flex-shrink:0;
+    background:var(--blue-deep);
+    color:var(--white);
+    padding:0.4rem 0.95rem;
+    border-radius:100px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .promo-bar-cta:hover{ background:#152a31; }
+  .promo-bar:hover .promo-bar-cta{ transform:translateX(2px); }
+  .promo-bar-cta svg{ width:14px; height:14px; }
   .hero-inner{
     max-width:1180px;
     margin:0 auto;
@@ -1022,7 +1069,11 @@
   }
   .cal-day--free:hover{ background:var(--stone); }
   .cal-day--selected{ background:var(--blue) !important; color:var(--white); }
-  .cal-day--inrange{ background:var(--sand); border-radius:0; }
+  .cal-day--inrange{
+    background:rgba(127,174,192,0.4);
+    border:1.5px solid var(--blue);
+    border-radius:50%;
+  }
   .cal-legend{
     display:flex;
     flex-wrap:wrap;
@@ -1065,6 +1116,8 @@
   .avail-box.ok .avail-status{ color:var(--blue-deep); }
   .avail-box.no .avail-status, .avail-box.err .avail-status{ color:var(--warn); }
   .avail-price{ font-size:0.92rem; color:var(--ink); margin-bottom:0.3rem; }
+  .avail-promo{ color:var(--olive); font-weight:600; }
+  .avail-promo-strike{ text-decoration:line-through; color:var(--ink-soft); font-weight:400; margin-left:0.3rem; }
   .avail-price strong{ font-weight:700; }
   .avail-note{ font-size:0.82rem; color:var(--ink-soft); }
   .avail-suggestions{
@@ -1146,7 +1199,7 @@
   @media (max-width: 560px){
     .feature-list{ grid-template-columns:1fr; }
     section{ padding:5rem 0; }
-    .hero{ padding-top:6.5rem; }
+    .hero{ padding-top:calc(6.5rem + var(--bar-h)); }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -1159,6 +1212,10 @@
 </head>
 <body>
 
+<a href="#contactos" class="promo-bar" id="promoBadge">
+  <span class="promo-bar-text"><strong>Agosto · Última oportunidade!</strong> Reserva de 19/08 a 24/08 — oferta da última noite</span>
+  <span class="promo-bar-cta">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>
 <header class="site-nav" id="siteNav">
   <a href="#top" class="brand">
     <img src="assets/logo-mark.png" alt="MonteZinho" class="logo-light">
@@ -1729,6 +1786,15 @@
     });
   });
 
+  // ---------- PROMO BAR HEIGHT (keeps nav/hero spacing correct if the bar wraps to 2 lines) ----------
+  function updatePromoBarHeight(){
+    const bar = document.querySelector('.promo-bar');
+    if(!bar) return;
+    document.documentElement.style.setProperty('--bar-h', bar.getBoundingClientRect().height + 'px');
+  }
+  updatePromoBarHeight();
+  window.addEventListener('resize', updatePromoBarHeight);
+
   // Nav background on scroll
   const nav = document.getElementById('siteNav');
   window.addEventListener('scroll', () => {
@@ -1859,6 +1925,9 @@
   function formatShort(date){
     return date.getUTCDate() + ' ' + MONTH_NAMES[date.getUTCMonth()];
   }
+  function formatFullMonth(date){
+    return date.getUTCDate() + ' de ' + MONTH_FULL_NAMES[date.getUTCMonth()];
+  }
   const WEEKDAY_NAMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   function formatFull(date){
     const dd = String(date.getUTCDate()).padStart(2, '0');
@@ -1885,12 +1954,30 @@
   function rateForNight(night){
     return AVAILABLE_DATES[toISO(night)];
   }
+
+  // Promo: specific nights offered for free (e.g. "last night on us" for the August
+  // 19–24 promotion). Add/remove ISO dates here to run other free-night offers.
+  const FREE_NIGHTS = ['2026-08-23'];
+  function isFreeNight(night){
+    return FREE_NIGHTS.includes(toISO(night));
+  }
+
   function nightlyBreakdown(start, end){
     const rates = [];
     for(let n = new Date(start); n < end; n = addDays(n, 1)){
       rates.push(rateForNight(n));
     }
     return rates;
+  }
+  function formatEuro(n){
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+  function freeNightsInRange(start, end){
+    const free = [];
+    for(let n = new Date(start); n < end; n = addDays(n, 1)){
+      if(isFreeNight(n)) free.push({ date: new Date(n), rate: rateForNight(n) });
+    }
+    return free;
   }
   function findAlternative(start, end, direction, maxDays){
     const nights = daysBetween(start, end);
@@ -1905,7 +1992,12 @@
   }
   function priceFor(start, end, hasPets){
     const rates = nightlyBreakdown(start, end);
-    const lodging = rates.reduce((sum, r) => sum + r, 0);
+    let n = new Date(start);
+    let lodging = 0;
+    for(const r of rates){
+      if(!isFreeNight(n)) lodging += r;
+      n = addDays(n, 1);
+    }
     return lodging + CLEANING_FEE + (hasPets ? PET_FEE : 0);
   }
 
@@ -1916,6 +2008,7 @@
   const checkBtn = document.getElementById('checkAvailabilityBtn');
   const resultBox = document.getElementById('availabilityResult');
   const mensagemField = document.getElementById('mensagem');
+  let lastAutoMessage = '';
   const syncStatusEl = document.getElementById('syncStatus');
 
   function renderSyncStatus(){
@@ -2006,29 +2099,45 @@
 
     if(isRangeFree(start, end)){
       const rates = nightlyBreakdown(start, end);
-      const lodging = rates.reduce((sum, r) => sum + r, 0);
+      const freeNights = freeNightsInRange(start, end);
+      const freeIsoSet = freeNights.map(f => toISO(f.date));
+      let n = new Date(start);
+      const payableRates = [];
+      for(const r of rates){
+        if(!freeIsoSet.includes(toISO(n))) payableRates.push(r);
+        n = addDays(n, 1);
+      }
+      const lodging = payableRates.reduce((sum, r) => sum + r, 0);
       const total = lodging + CLEANING_FEE + (hasPets ? PET_FEE : 0);
-      const sameRate = rates.every(r => r === rates[0]);
+      const sameRate = payableRates.every(r => r === payableRates[0]);
       let html = '<div class="avail-box ok">';
       html += '<p class="avail-status">✓ Datas disponíveis</p>';
-      if(sameRate){
-        html += '<p class="avail-price">' + nights + ' noites × ' + rates[0] + '€ = <strong>' + lodging + '€</strong></p>';
+      if(payableRates.length === 0){
+        html += '<p class="avail-price">Todas as noites incluídas na oferta</p>';
+      } else if(sameRate){
+        html += '<p class="avail-price">' + payableRates.length + ' noites × ' + formatEuro(payableRates[0]) + '€ = <strong>' + formatEuro(lodging) + '€</strong></p>';
       } else {
-        html += '<p class="avail-price">' + nights + ' noites (tarifa variável): <strong>' + lodging + '€</strong></p>';
+        html += '<p class="avail-price">' + payableRates.length + ' noites (tarifa variável): <strong>' + formatEuro(lodging) + '€</strong></p>';
       }
-      html += '<p class="avail-price">Limpeza: <strong>' + CLEANING_FEE + '€</strong></p>';
+      freeNights.forEach(f => {
+        html += '<p class="avail-price avail-promo">🎁 Oferta: noite de ' + formatShort(f.date) + ' grátis <span class="avail-promo-strike">' + formatEuro(f.rate) + '€</span></p>';
+      });
+      html += '<p class="avail-price">Limpeza: <strong>' + formatEuro(CLEANING_FEE) + '€</strong></p>';
       if(hasPets){
-        html += '<p class="avail-price">Animais de estimação: <strong>' + PET_FEE + '€</strong></p>';
+        html += '<p class="avail-price">Animais de estimação: <strong>' + formatEuro(PET_FEE) + '€</strong></p>';
       }
-      html += '<p class="avail-price">Valor Total: <strong>' + total + '€</strong></p>';
+      html += '<p class="avail-price">Valor Total: <strong>' + formatEuro(total) + '€</strong></p>';
       html += '<p class="avail-note">Esta reserva fica confirmada depois de validarmos por telefone ou email.</p>';
       html += '</div>';
       resultBox.innerHTML = html;
       resultBox.classList.add('show');
-      if(mensagemField && !mensagemField.value){
+      if(mensagemField && (mensagemField.value === '' || mensagemField.value === lastAutoMessage)){
         const guestCount = hospedesSelect ? hospedesSelect.value : '';
-        mensagemField.value = 'Gostaria de reservar de ' + formatShort(start) + ' a ' + formatShort(end) + ' (' + nights + ' noites) para ' + guestCount + ' hóspedes' +
-          (hasPets ? ', com animais de estimação' : '') + '. Valor Total: ' + total + '€.';
+        const freeNightNote = freeNights.length ? (' (inclui ' + freeNights.length + ' noite grátis em oferta)') : '';
+        const autoMsg = 'Gostaria de reservar de ' + formatFullMonth(start) + ' a ' + formatFullMonth(end) + ' (' + nights + ' noites) para ' + guestCount + ' hóspedes' +
+          (hasPets ? ', com animais de estimação' : '') + '. Valor Total: ' + formatEuro(total) + '€' + freeNightNote + '.';
+        mensagemField.value = autoMsg;
+        lastAutoMessage = autoMsg;
       }
     } else {
       const later = findAlternative(start, end, 1, 90);
@@ -2042,7 +2151,7 @@
         alts.forEach(alt => {
           const altTotal = priceFor(alt.start, alt.end, hasPets);
           html += '<button type="button" class="avail-chip" data-start="' + toISO(alt.start) + '" data-end="' + toISO(alt.end) + '">' +
-            formatShort(alt.start) + ' – ' + formatShort(alt.end) + ' · ' + altTotal + '€</button>';
+            formatShort(alt.start) + ' – ' + formatShort(alt.end) + ' · ' + formatEuro(altTotal) + '€</button>';
         });
         html += '</div>';
       } else {
@@ -2068,6 +2177,14 @@
   }
 
   checkBtn.addEventListener('click', renderResult);
+
+  // Keep the price estimate in sync if the guest already has a result showing
+  // (e.g. from the promo bar) and then changes pets or guest count.
+  function refreshResultIfShown(){
+    if(resultBox.classList.contains('show')) renderResult();
+  }
+  if(animaisSelect) animaisSelect.addEventListener('change', refreshResultIfShown);
+  if(hospedesSelect) hospedesSelect.addEventListener('change', refreshResultIfShown);
 
   // ---------- FORM SUBMISSION (built as a clean mailto: link via JS, to avoid the
   // browser's "insecure form" warning triggered by native form-to-mailto submissions,
@@ -2291,6 +2408,24 @@
     renderCalendar();
     updateDateDisplays();
   })();
+
+  // ---------- PROMO BADGE ----------
+  const promoBadgeEl = document.getElementById('promoBadge');
+  if(promoBadgeEl){
+    promoBadgeEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      entradaInput.value = '2026-08-19';
+      saidaInput.value = '2026-08-24';
+      calStart = parseISO('2026-08-19');
+      calEnd = parseISO('2026-08-24');
+      calViewYear = calStart.getUTCFullYear();
+      calViewMonth = calStart.getUTCMonth();
+      renderCalendar();
+      updateDateDisplays();
+      renderResult();
+      document.getElementById('contactos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
   // ---------- REVIEW "READ MORE" ----------
   document.querySelectorAll('.review-card').forEach(card => {
