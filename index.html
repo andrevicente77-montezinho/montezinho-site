@@ -1005,6 +1005,17 @@
   }
   .submit-confirm.show{ display:block; }
   .submit-confirm .avail-status{ color:var(--blue-deep); margin-bottom:0.3rem; }
+  .submit-error{
+    display:none;
+    background:var(--warn-bg);
+    border-left:3px solid var(--warn);
+    border-radius:var(--radius);
+    padding:1.1rem 1.4rem;
+    margin-top:-0.4rem;
+  }
+  .submit-error.show{ display:block; }
+  .submit-error .avail-status{ color:var(--warn); margin-bottom:0.3rem; }
+  .submit-error a{ color:var(--warn); text-decoration:underline; }
 
   .availability-btn{ align-self:flex-start; margin-top:-0.4rem; }
   .availability-btn:disabled{ opacity:0.5; cursor:wait; }
@@ -1235,6 +1246,7 @@
 
   :focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1746,11 +1758,15 @@
             <input type="checkbox" id="termsCheck" name="termsCheck" required>
             <span>Li e aceito os <a href="termos.html" target="_blank" rel="noopener">Termos e Condições de Reserva</a> e a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
           </label>
-          <button type="submit" class="btn btn-primary">Enviar pedido</button>
-          <p class="form-note">Ao enviar o pedido, o seu email vai abrir com esta mensagem pronta a enviar para montezinho.al@gmail.com.</p>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Enviar pedido</button>
+          <p class="form-note">Ao enviar, o seu pedido é encaminhado diretamente para montezinho.al@gmail.com.</p>
           <div id="submitConfirm" class="submit-confirm">
-            <p class="avail-status">✓ Pedido preparado</p>
-            <p class="avail-note">A sua aplicação de email deve ter aberto, com a mensagem já preenchida. Depois de a enviar, entraremos em contacto em breve.</p>
+            <p class="avail-status">✓ Pedido enviado com sucesso</p>
+            <p class="avail-note">Recebemos o seu pedido e entraremos em contacto em breve.</p>
+          </div>
+          <div id="submitError" class="submit-error">
+            <p class="avail-status">✕ Não foi possível enviar o pedido</p>
+            <p class="avail-note">Por favor tente novamente, ou contacte-nos diretamente por telefone (<a href="tel:+351914432980">+351 914 432 980</a>) ou email (<a href="mailto:montezinho.al@gmail.com">montezinho.al@gmail.com</a>).</p>
           </div>
         </form>
       </div>
@@ -2221,11 +2237,20 @@
   if(animaisSelect) animaisSelect.addEventListener('change', refreshResultIfShown);
   if(hospedesSelect) hospedesSelect.addEventListener('change', refreshResultIfShown);
 
-  // ---------- FORM SUBMISSION (built as a clean mailto: link via JS, to avoid the
-  // browser's "insecure form" warning triggered by native form-to-mailto submissions,
-  // and to control exactly how the email is formatted) ----------
+  // ---------- FORM SUBMISSION (sent directly via EmailJS — no email app needed) ----------
+  // EDIT these 3 values with your own EmailJS account details (see emailjs.com):
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+  if(window.emailjs && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY'){
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
   const contactFormEl = document.getElementById('contactForm');
   const submitConfirmEl = document.getElementById('submitConfirm');
+  const submitErrorEl = document.getElementById('submitError');
+  const submitBtnEl = document.getElementById('submitBtn');
   const nomeInput = document.getElementById('nome');
   const emailInput = document.getElementById('email');
 
@@ -2239,6 +2264,9 @@
         return;
       }
 
+      submitConfirmEl.classList.remove('show');
+      if(submitErrorEl) submitErrorEl.classList.remove('show');
+
       const nome = nomeInput.value.trim();
       const emailVal = emailInput.value.trim();
       const checkin = entradaInput.value ? formatFull(parseISO(entradaInput.value)) : '—';
@@ -2246,33 +2274,43 @@
       const guests = GUEST_LABELS[hospedesSelect.value] || (hospedesSelect.value + ' hóspedes');
       const pets = (animaisSelect && animaisSelect.value === 'sim') ? 'Sim (+40€)' : 'Não';
       const msg = mensagemField.value.trim();
-
       const subject = 'MonteZinho – Pedido de reserva de ' + nome;
-      const bodyLines = [
-        'Novo pedido de reserva — MonteZinho',
-        '',
-        'Nome: ' + nome,
-        'Email: ' + emailVal,
-        'Check-in: ' + checkin,
-        'Check-out: ' + checkout,
-        'Hóspedes: ' + guests,
-        'Animais de estimação: ' + pets,
-        '',
-        'Mensagem:',
-        (msg || '(sem mensagem adicional)'),
-      ];
-      const body = bodyLines.join('\n');
 
-      const mailtoUrl = 'mailto:montezinho.al@gmail.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
+      const templateParams = {
+        to_email: 'montezinho.al@gmail.com',
+        subject: subject,
+        from_name: nome,
+        from_email: emailVal,
+        reply_to: emailVal,
+        checkin: checkin,
+        checkout: checkout,
+        guests: guests,
+        pets: pets,
+        message: msg || '(sem mensagem adicional)',
+      };
 
-      window.location.href = mailtoUrl;
+      if(!window.emailjs || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY'){
+        console.error('EmailJS não está configurado. Preencha EMAILJS_PUBLIC_KEY/SERVICE_ID/TEMPLATE_ID.');
+        if(submitErrorEl) submitErrorEl.classList.add('show');
+        return;
+      }
 
-      submitConfirmEl.classList.add('show');
-      setTimeout(() => {
-        submitConfirmEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 200);
+      submitBtnEl.disabled = true;
+      submitBtnEl.textContent = 'A enviar…';
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams).then(() => {
+        submitConfirmEl.classList.add('show');
+        contactFormEl.reset();
+        setTimeout(() => {
+          submitConfirmEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 200);
+      }).catch((err) => {
+        console.error('Erro ao enviar via EmailJS:', err);
+        if(submitErrorEl) submitErrorEl.classList.add('show');
+      }).finally(() => {
+        submitBtnEl.disabled = false;
+        submitBtnEl.textContent = 'Enviar pedido';
+      });
     });
   }
 
